@@ -36,7 +36,17 @@
                     <td>{{ i.value7 }}</td>
                     <td>{{ i.value8 }}</td>
                     <td><a href="{% url 'update' i.id %}">Edit</a></td>
-                    <td><a href="{% url 'delete' i.id %}">Del</a></td>
+                    <td>
+                        <form id="delete_form" action="{% url 'delete' i.id %}" method="post">{% csrf_token %}</form>
+                        <a href="javascript:void()" onclick="delete_question()">Del</a>
+                        <script>
+                           function delete_question(){
+                               if (confirm("Вы уверены?")){
+                                   document.getElementById('delete_form').submit()
+                               }
+                           }
+                            </script>
+                    </td>
                 </tr>
                 {% endfor %}
             </tr>

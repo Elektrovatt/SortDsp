@@ -14,7 +14,9 @@ aside img {
     margin-left: auto;
 }
 
-
+#delete_form{
+    display: none;
+}
 
 
 .th1{

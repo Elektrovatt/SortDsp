@@ -8,64 +8,42 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 
-# def add_table_thickness_ground_plate(request):
-#   тоже самое что и class table_thickness_ground_plate_view(ListView):
-#     list_value = Add_table_thickness_ground_plate.objects.all()
-#     context = {
-#     'list_value':list_value,
-#        }
-#     return render(request, 'main/plate.html', context)
 
 class table_thickness_ground_plate_view(ListView):
-    #таблица измерений толщины плиты
+    # Класс для отображения всех записей смена дата измерения плиты
+    #таблица измерений толщины плиты, тоже самое что и def add_table_thickness_ground_plate(request):
     model = table_thickness_ground_plate_model
     template_name = 'main/plate.html'
     context_object_name = 'list_value'
 
 
-class create_view(ListView):
+class create_view(CreateView):
+    #Класс для создания новой записи с измерениями толщины плиты.
+    #Тоже самое что и def create(request):
     model = table_thickness_ground_plate_model
     template_name = 'main/create_new_thickness_ground_plate.html'
     form_class = create_thickness_ground_plate_form
-    success_url = reverse_lazy('main/create_new_thickness_ground_plate.html')
+    success_url = reverse_lazy('plate')
 
+    def get_context_data(self, **kwargs):
+        kwargs['list_articles'] =  table_thickness_ground_plate_model.objects.all().order_by('-date_created')
+        return super().get_context_data(**kwargs)
 
-# class update_table(UpdateView):
-#     model = table_thickness_ground_plate_model
-#     template_name = 'main/update.html'
-#     form_class = create_thickness_ground_plate_form
+class update_view(UpdateView):
+    #Класс для редактирования записи
+    # Тоже самое что и def update_table(request, pk):
+    model = table_thickness_ground_plate_model
+    template_name = 'main/create_new_thickness_ground_plate.html'
+    form_class = create_thickness_ground_plate_form
+    success_url = reverse_lazy('plate')
+    def get_context_data(self, **kwargs):
+        kwargs['update'] =  True
+        return super().get_context_data(**kwargs)
 
-
-def update_table(request, pk):
-    get_plate = table_thickness_ground_plate_model.objects.get(pk=pk)
-    if request.method == 'POST':
-        form = create_thickness_ground_plate_form(request.POST, instance = get_plate)
-        if form.is_valid():
-            form.save()
-            return redirect('plate')
-    template = 'main/update.html'
-    context = {
-            'get_plate': get_plate,
-            'update':True,
-            'form':create_thickness_ground_plate_form(instance = get_plate),
-    }
-    return render(request, template, context)
-
-def create(request):
-    error = ''
-    if request.method == 'POST':
-        form = create_thickness_ground_plate_form(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('plate')
-        else: 'Форма была не верной'
-    form = create_thickness_ground_plate_form()
-    context = {
-        'form': form,
-        'error': error
-                }
-    return render(request, 'main/create_new_thickness_ground_plate.html', context)
-
+class delete_view(DeleteView):
+    model = table_thickness_ground_plate_model
+    template_name = 'main/create_new_thickness_ground_plate.html'
+    success_url = reverse_lazy('plate')
 
 def delete(request,pk):
     get_plate = table_thickness_ground_plate_model.objects.get(pk=pk)
@@ -78,3 +56,42 @@ def index(request):
 
 def about(request):
     return render(request, 'main/about.html')
+
+
+# def create(request):
+#     error = ''
+#     if request.method == 'POST':
+#         form = create_thickness_ground_plate_form(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('plate')
+#         else: 'Форма была не верной'
+#     form = create_thickness_ground_plate_form()
+#     context = {
+#         'form': form,
+#         'error': error
+#                 }
+#     return render(request, 'main/create_new_thickness_ground_plate.html', context)
+
+# def add_table_thickness_ground_plate(request):
+#   тоже самое что и class table_thickness_ground_plate_view(ListView):
+#     list_value = Add_table_thickness_ground_plate.objects.all()
+#     context = {
+#     'list_value':list_value,
+#        }
+#     return render(request, 'main/plate.html', context)
+
+# def update_table(request, pk):
+#     get_plate = table_thickness_ground_plate_model.objects.get(pk=pk)
+#     if request.method == 'POST':
+#         form = create_thickness_ground_plate_form(request.POST, instance = get_plate)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('plate')
+#     template = 'main/update.html'
+#     context = {
+#             'get_plate': get_plate,
+#             'update':True,
+#             'form':create_thickness_ground_plate_form(instance = get_plate),
+#     }
+#     return render(request, template, context)
