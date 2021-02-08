@@ -1,0 +1,34 @@
+body{
+    background: beige;
+}
+
+aside img {
+    width: 100px;
+    float: left;
+    padding-right: 5px;
+}
+.voiti{
+    margin-left: auto;
+}
+.sortdsp{
+    margin-left: auto;
+}
+
+
+
+
+.th1{
+    align-content: center;
+    text-align: center;
+}
+.align-middle {
+    text-align: center;
+}
+.btn1
+{width:250px;}
+
+form{
+    margin-left: 30%;
+    width: 500px;
+    margin-top: 50px;
+}

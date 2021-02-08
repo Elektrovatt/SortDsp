@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% block title %}
+Главная страничка
+{% endblock %}
+
+{% block content %}
+ <div class="container">
+
+         <a class="p-4  text-dark btn btn-outline-primary" href="{% url 'plate' %}" >Толщина плиты</a>
+
+
+         <a class="p-4 text-dark btn btn-outline-primary" href="{% url 'plate' %}" >Толщина пачки</a>
+
+
+         <a class="p-4 text-dark btn btn-outline-primary" href="{% url 'plate' %}" >Шлиф. ленты</a>
+
+
+         <a class="p-4 text-dark btn btn-outline-primary" href="{% url 'plate' %}" >Этикетки</a>
+
+
+         <a class="p-4 text-dark btn btn-outline-primary" href="{% url 'plate' %}" >Отчёт</a>
+        </div>
+
+{% endblock %}
+

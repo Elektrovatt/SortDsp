@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% block title %}
+Форма по добавлению толщины плиты
+{% endblock %}
+
+<div class="container">
+
+
+    {% block content %}
+         <p><a href="{% url 'plate' %}">Вернуться назад</a></p>
+                <form method="post">
+                        {% csrf_token %}
+                        {{ form.number_shift }}<br>
+                        {{ form.date_created }}
+                        {{ form.value0 }}<br>
+                        {{ form.value1 }}<br>
+                        {{ form.value2 }}<br>
+                        {{ form.value3 }}<br>
+                        {{ form.value4 }}<br>
+                        {{ form.value5 }}<br>
+                        {{ form.value6 }}<br>
+                        {{ form.value7 }}<br>
+                        {{ form.value8 }}<br>
+                    <span>{{ error }}</span>
+                    <button class="btn btn-success" type="submit">Сохранить</button>
+                </form>
+
+    {% endblock %}
+
+</div>

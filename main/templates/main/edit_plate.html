@@ -1,0 +1,62 @@
+{% extends 'main/base.html' %}
+{% block title %}
+Толщина плиты
+{% endblock %}
+
+<div class="container">
+
+{% block content %}
+<div class="container">
+     <a class="p-2 text-dark btn btn-outline-primary" href="{% url 'home' %}" >Home</a>
+
+
+</div>
+
+<br>
+<table class="table table-striped table-hover  th1">
+  <thead>
+
+        <tr>
+            <th rowspan="2" class="align-middle" style="width:75px">Смена</th>
+            <th rowspan="2" class="align-middle" style="width:200px">Дата</th>
+            <th rowspan="2" class="align-middle" style="width:95px">Толщина  мм</th>
+            <th colspan="9" class="align-middle">Точки замеров</th>
+        </tr>
+        <tr>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+        </tr>
+    </thead>
+  <tbody>
+         <tr>
+        {% for i in list_value %}
+            <tr>
+                <td> {{ i.number_shift }}</td>
+                <td>{{ i.date_created }}</td>
+                <td>{{ i.value0 }}</td>
+                <td>{{ i.value1 }}</td>
+                <td>{{ i.value2 }}</td>
+                <td>{{ i.value3 }}</td>
+                <td>{{ i.value4 }}</td>
+                <td>{{ i.value5 }}</td>
+                <td>{{ i.value6 }}</td>
+                <td>{{ i.value7 }}</td>
+                <td>{{ i.value8 }}</td>
+                <td><a href="#">Edit</a></td>
+            </tr>
+        {% endfor %}
+        </tr>
+    </tbody>
+</table>
+
+
+
+{% endblock %}
+
+    </div>
