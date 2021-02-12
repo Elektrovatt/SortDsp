@@ -2,6 +2,8 @@ from django import forms
 from .models import table_thickness_ground_plate_model
 from django.forms import ModelForm, TextInput, DateTimeInput, DateTimeField
 
+
+
 class create_thickness_ground_plate_form(ModelForm):
         class Meta:
             model = table_thickness_ground_plate_model

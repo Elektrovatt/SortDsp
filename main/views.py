@@ -8,8 +8,10 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 
+
+
 class table_thickness_ground_plate_view(ListView):
-    # Класс для отображения всех записей смена дата измерения плиты
+    # Класс для отображения всех записей. смена, дата измерения плиты
     #таблица измерений толщины плиты, тоже самое что и def add_table_thickness_ground_plate(request):
     model = table_thickness_ground_plate_model
     template_name = 'main/plate.html'
@@ -17,6 +19,8 @@ class table_thickness_ground_plate_view(ListView):
 
 
 class CustomSuccessMessageMixin:
+    # для появления записи о обновления поля или добавлении нового
+    # подсвечивается редактированая запись
     @property
     def success_msg(self):
         return False

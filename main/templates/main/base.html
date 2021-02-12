@@ -33,9 +33,20 @@
                <h5 class="my-0  fw-normal">Сортировка ДСП</h5>
             </div>
 
-             <div class="voiti">
-             <a class="btn btn-outline-primary" href="#">Выйти</a>
-             </div>
+            <ul>
+                 <li class="nav-item">
+                     {% url 'login_page' as url_login_page %}
+                     <a class="btn btn-outline-primary {% if url_login_page == request.path %}active{% endif %}" href="{{url_login_page}}">Авторизация</a>
+<!--                     <a class="btn btn-outline-primary" href="{% url 'create' %}">Регистрация</a>-->
+                 </li>
+                 <li class="nav-item">
+                     {% url 'register_page' as url_register_page %}
+                     <a class="btn btn-outline-primary {% if url_register_page == request.path %}active{% endif %}" href="{{url_register_page}}">Регистрация</a>
+                 </li>
+                 <li class="nav-item">
+                      <a class="btn btn-outline-primary" href="#">Выйти</a>
+                 </li>
+            </ul>
      </div>
     </aside>
     <div class="container">

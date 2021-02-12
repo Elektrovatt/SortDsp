@@ -10,4 +10,5 @@ urlpatterns = [
     path('delete/<int:pk>', views.delete_view.as_view(), name='delete'),
 
 
+
 ]
