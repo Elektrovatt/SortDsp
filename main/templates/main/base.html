@@ -18,35 +18,44 @@
 </head>
 <body>
     <aside>
-     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <img src="{% static 'main/img/site_logo.png' %}" alt="Лого">
+    <div class="container-fluid align-content-start ">
+     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm justify-content-between">
+           <div class="d-flex col-auto align-items-start">
+               <img src="{% static 'main/img/site_logo.png' %}" alt="Лого">
 
 
-            <div class="main-menu">
-              <a class="p-2 text-dark btn btn-outline-primary ml-3" href="{% url 'home' %}" >Главная</a>
-
-              <a class="p-2 text-dark btn btn-outline-primary" href="{% url 'about-me' %}">Про меня</a>
-
-
+                <div class="mr-0">
+                          <a class="p-2 text-dark btn btn-outline-primary ml-3" href="{% url 'home' %}" >Главная</a>
+                          <a class="p-2 text-dark btn btn-outline-primary" href="{% url 'about-me' %}">Про меня</a>
+                </div>
             </div>
-            <div class="sortdsp">
-               <h5 class="my-0  fw-normal">Сортировка ДСП</h5>
+            <div class="mt-2 col-5 text-center">
+                <h5 class="p-2">Формы для заполнения</h5>
             </div>
 
-            <ul>
-                 <li class="nav-item">
-                     {% url 'login_page' as url_login_page %}
-                     <a class="btn btn-outline-primary {% if url_login_page == request.path %}active{% endif %}" href="{{url_login_page}}">Авторизация</a>
-<!--                     <a class="btn btn-outline-primary" href="{% url 'create' %}">Регистрация</a>-->
-                 </li>
-                 <li class="nav-item">
-                     {% url 'register_page' as url_register_page %}
-                     <a class="btn btn-outline-primary {% if url_register_page == request.path %}active{% endif %}" href="{{url_register_page}}">Регистрация</a>
-                 </li>
-                 <li class="nav-item">
-                      <a class="btn btn-outline-primary" href="#">Выйти</a>
-                 </li>
-            </ul>
+                    <div class="d-flex col-auto align-items-end mr-0">
+                        <ul class="list-unstyled list-inline mr-0 mb-0 align-self-center">
+                            {{request.user}}
+                            {% if request.user.is_authenticated %}
+                            <li class="d-inline">
+                                 {% url 'logout_page' as url_logout_page %}
+                                 <a class="text-dark btn btn-outline-primary ml-3 href="{{url_logout_page}}">Выйти</a>
+                             </li>
+                            {% else %}
+                                <li class="d-inline">
+                                     {% url 'login_page' as url_login_page %}
+                                     <a class=" text-dark btn btn-outline-primary ml-3 {% if url_login_page == request.path %}active{% endif %}" href="{{url_login_page}}">Авторизация</a>
+                                </li>
+                                 <li class="d-inline">
+                                     {% url 'register_page' as url_register_page %}
+                                     <a class="text-dark btn btn-outline-primary ml-3 {% if url_register_page == request.path %}active{% endif %}" href="{{url_register_page}}">Регистрация</a>
+                                 </li>
+                            {% endif %}
+                        </ul>
+                     </div>
+
+
+        </div>
      </div>
     </aside>
     <div class="container">

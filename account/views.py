@@ -1,34 +1,37 @@
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from .models import *
 from .forms import AuthUserForm, RegisterUserForm
 from django.contrib.auth.models import User
-from django.shortcuts import render,redirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 from django.contrib import messages
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth import authenticate, login
 # Create your views here.
 
 class MyprojectLoginView(LoginView):
     template_name = 'account/login.html'
     form_class = AuthUserForm
-    success_url = reverse_lazy('main/index.html')
+    success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        return self.success_url
 
 class RegisterUserView(CreateView):
     model = User
     template_name = 'account/register.html'
-    form_class =  RegisterUserForm
-    success_url = reverse_lazy('main/index.html')
+    form_class = RegisterUserForm
+    success_url = reverse_lazy('home')
     success_msg = 'Пользователь успешно создан'
 
+    def form_invalid(self, form):
+        form_valid = super().form_valid(form)
+        username = form.clened_data["username"]
+        password = form.clened_data["password"]
+        aut_user = authenticate(username=username, password=password)
+        login(self.request, aut_user)
+        return form_valid
 
-def registerPage(request):
-    context = {}
-    return render(request, 'account/register.html', context)
 
 
-def loginPage(request):
-    context = {}
-    return render(request, 'account/login.html', context)
+
+class MyProjectLogout(LogoutView):
+    next_page = reverse_lazy('home')

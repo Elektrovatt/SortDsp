@@ -12,6 +12,10 @@ aside img {
 }
 .sortdsp{
     margin-left: auto;
+    width: 300px;
+}
+.height1{
+  height: 42px;
 }
 
 #delete_form{
