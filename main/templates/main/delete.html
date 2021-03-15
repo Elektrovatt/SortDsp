@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+{% block title %}
+Форма для удаления плиты.
+{% endblock %}
+
+<div class="container">
+
+
+    {% block content %}
+         <p><a href="{% url 'plate' %}">Вернуться назад</a> </p>
+    <p>Вы действительно хотите удалить эту запись?</p>
+                <form method="post">
+                        {% csrf_token %}
+                     {{ form.number_shift }}<br>
+
+                    <button class="btn btn-success" type="submit">Да, удалить</button>
+                </form>
+
+
+    {% endblock %}
+
+</div>

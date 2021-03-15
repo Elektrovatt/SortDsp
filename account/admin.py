@@ -6,4 +6,6 @@ from .models import *
 
 admin.site.register(Customer)
 admin.site.register(Add_new_worker_shift)
+admin.site.register(ProfileUserModel)
+
 

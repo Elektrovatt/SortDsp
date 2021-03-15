@@ -8,6 +8,7 @@
     <p><a href="{% url 'plate' %}">Вернуться назад</a></p>
                 <form method="post">
                         {% csrf_token %}
+<!--                    {{ form.as_p }}<br>-->
                         {{ form.number_shift }}<br>
                         {{ form.date_created }}
                         {{ form.value0 }}<br>

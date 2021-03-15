@@ -1,14 +1,18 @@
 from django import forms
 from .models import table_thickness_ground_plate_model
-from django.forms import ModelForm, TextInput, DateTimeInput, DateTimeField
+from django.forms import ModelForm, TextInput
 
 
 
 class create_thickness_ground_plate_form(ModelForm):
         class Meta:
             model = table_thickness_ground_plate_model
-            fields = '__all__'
+            fields = ('__all__')
             widgets = {
+                "is_customer": TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Автор'
+                }),
                 "number_shift":TextInput(attrs={
                     'class':'form-control',
                     'placeholder':'Номер смены'

@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% block title %}
+Толщина плиты
+{% endblock %}
+<div class="container">
+{% block content %}
+     <p><a href="{% url 'home' %}">Вернуться назад</a></p>
+        <h3>Добро пожаловать    {{ user }}  </h3>
+
+                        {{ profile.user }}<br>
+                        {{ profile.is_customer }}<br>
+                        {{ profile.is_customer2 }}<br>
+                        {{ profile.value1 }}<br>
+                        {{ profile.value2 }}<br>
+                        {{ profile.value3 }}<br>
+
+                    <span>{{ error }}</span><br>
+                    <button class="btn btn-success" type="submit">Сохранить</button>
+                    <button type="submit" class="btn btn-success"><a
+                            href="{% url 'update_profile_page' user.id %}">Редактировать</a></button>
+
+{% endblock %}
+
+</div>
