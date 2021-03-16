@@ -47,7 +47,7 @@ class ProfileUserModel(models.Model):
 
     class Meta:
         verbose_name = 'Профиль'
-        verbose_name_plural = 'Профиля, выбор Форм для заполнения'
+        verbose_name_plural = 'Профили для выбора Форм'
         ordering = ('-value2',)
 
 

@@ -7,6 +7,24 @@ from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+menu = [{'title': "Шлифовка - Толщина Шлифованой плиты", 'url_name': 'plate'},
+        {'title': "Шлифовка - Учёт шлифовальных материалов", 'url_name': 'about-me'},
+        {'title': "Шлифовка - Толщина пакета шлифованной плиты", 'url_name': 'about-me'},
+        {'title': "Пресс - Форма контроля раб. состояния форсунок САП", 'url_name': 'about-me'},
+        {'title': "Пресс - Форма очистки лент преса", 'url_name': 'about-me'},
+        {'title': "Пресс - толщина нешлифованой плиты", 'url_name': 'about-me'},
+        {'title': "Пресс и Сушилка - Расход природного газа и древесной пыли", 'url_name': 'about-me'},
+        {'title': "Пресс - Производственные параметры для пресовщика", 'url_name': 'about-me'},
+        {'title': "Распиловка - Учёт замены чернильной системы", 'url_name': 'about-me'},
+        {'title': "Распиловка - Измерение покоробленности", 'url_name': 'about-me'},
+        {'title': "Распиловка - Толщина пакета нешлифованой плиты", 'url_name': 'about-me'}
+]
+
+
+def index(request):
+    context = {'menu':menu, 'title':'Главная страница'}
+
+    return render(request, 'main/index.html', context=context)
 
 class table_thickness_ground_plate_view(ListView):
     """" Класс для отображения всех записей. Cмена, дата измерения плиты
@@ -103,8 +121,7 @@ class delete_view(LoginRequiredMixin, DeleteView):
         self.object.delete()
         return HttpResponseRedirect(success_url)
 
-def index(request):
-    return render(request, 'main/index.html')
+
 
 
 def about(request):

@@ -11,21 +11,11 @@
 
              <p> {% if form.is_customer.value == True %}
                             {{ user.username }}
-                    <div class="card border-primary mb-3 m-1" style="max-width: 180px; max-height: 180px">
-                        <div class="card-header">ПДСП</div>
-                        <div class="card-body">
-<!--                             url_name_page {{form.value1.value}}-->
-                            <p class="card-text"><a class="btn btn-link" href="{% url 'plate' %}" >Толщина плиты</a></p>
-                            <p>  </p>
-                        </div>
-                    </div>
+
 
                              {% else %}
                                                 ---
                         {% endif %}</p>
-
-
-
 
                         {% csrf_token %}<br>
                          {{ form.as_p }}
@@ -35,10 +25,6 @@
 <!--                        {{ form.value1 }}<br>-->
 <!--                        {{ form.value2 }}<br>-->
 <!--                        {{ form.value3 }}<br>-->
-
-
-
-
 
                     <span>{{ error }}</span><br>
                     <button class="btn btn-success" type="submit">Сохранить</button>
