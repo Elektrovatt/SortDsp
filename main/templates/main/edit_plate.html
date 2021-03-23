@@ -38,8 +38,7 @@
          <tr>
         {% for i in list_value %}
             <tr>
-                <td>{{ i.author }}</td>
-                <td> {{ i.number_shift }} </td>
+                <td>{{ i.author.last_name }}</td>
                 <td>{{ i.date_created }}</td>
                 <td>{{ i.value0 }}</td>
                 <td>{{ i.value1 }}</td>
