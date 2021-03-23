@@ -11,17 +11,13 @@
                 <form method="post">
                         {% csrf_token %}
 
-                        {{ form.number_shift }}<br>
-                        {{ form.date_created }}
-                        {{ form.value0 }}<br>
-                        {{ form.value1 }}<br>
-                        {{ form.value2 }}<br>
-                        {{ form.value3 }}<br>
-                        {{ form.value4 }}<br>
-                        {{ form.value5 }}<br>
-                        {{ form.value6 }}<br>
-                        {{ form.value7 }}<br>
-                        {{ form.value8 }}<br>
+                        {% for f in form %}
+                        <div class="form-control-test">
+                            <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}
+                        </div>
+                        <div class="form-error"> {{ f.errors }}</div>
+                        {% endfor%}
+
                     <span>{{ error }}</span>
                     <button class="btn btn-success" type="submit">Сохранить</button>
                 </form>

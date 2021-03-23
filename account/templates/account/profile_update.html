@@ -8,26 +8,21 @@
         <h3>Добро пожаловать    {{ user }}  </h3>
 
         <form method="post">
-
-             <p> {% if form.is_customer.value == True %}
-                            {{ user.username }}
-
-
-                             {% else %}
-                                                ---
-                        {% endif %}</p>
+            <div class="form-control-test">
+                <p> {% if form.is_customer.value == True %}
+                    {% else %}
+                               ---
+                    {% endif %}</p>
 
                         {% csrf_token %}<br>
-                         {{ form.as_p }}
-
-<!--                        {{ form.is_customer }}<br>-->
-<!--                        {{ form.is_customer2 }}<br>-->
-<!--                        {{ form.value1 }}<br>-->
-<!--                        {{ form.value2 }}<br>-->
-<!--                        {{ form.value3 }}<br>-->
+                         {% for f in form %}
+                            <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}:</label>{{ f }}</p>
+                            <div class="form-error"> {{ f.errors }}</div>
+                        {% endfor%}
 
                     <span>{{ error }}</span><br>
                     <button class="btn btn-success" type="submit">Сохранить</button>
+            </div>
         </form>
 
 
@@ -35,95 +30,3 @@
 {% endblock %}
 
 </div>
-
-
-
-
-<!--                        <div class="col-md-6">-->
-<!--                            <label for="fname">First Name</label>-->
-<!--                            <input type="text" id="fname" name="first_name" class="form-control"-->
-<!--                                   placeholder="Your firstname" value="{{ form.first_name.value }}">-->
-<!--                        </div>-->
-<!--                        <div class="col-md-6">-->
-<!--                            <label for="lname">Last Name</label>-->
-<!--                            <input type="text" id="lname" name="last_name" class="form-control"-->
-<!--                                   placeholder="Your lastname" value="{{ form.last_name.value }}">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-12">-->
-<!--                        <div class="form-group">-->
-<!--                            <label for="companyname">Company Name</label>-->
-<!--                            <input type="text" id="companyname" name="company_name" class="form-control"-->
-<!--                                   placeholder="Company Name" value="{{ form.company_name.value }}">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-12">-->
-<!--                        <div class="form-group">-->
-<!--                            <label for="fname">Address</label>-->
-<!--                            <input type="text" id="address" class="form-control" name="address"-->
-<!--                                   placeholder="Enter Your Address"-->
-<!--                                   value="{{ form.address.value }}">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-12">-->
-<!--                        <div class="form-group">-->
-<!--                            <label for="city">Town/City</label>-->
-<!--                            <div class="form-field">-->
-<!--                                <i class="icon icon-arrow-down3"></i>-->
-<!--                                <select name="city" id="people" class="form-control">-->
-<!--                                    {% for city in form.city %}-->
-<!--                                        <option value="{{ city.value }}">{{ city }}</option>-->
-<!--                                    {% endfor %}-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <div class="col-md-6">-->
-<!--                            <label for="stateprovince">State/Province</label>-->
-<!--                            <div class="form-field">-->
-<!--                                <i class="icon icon-arrow-down3"></i>-->
-<!--                                <select name="state" id="people" class="form-control">-->
-<!--                                    {% for state in form.state %}-->
-<!--                                        <option value="{{ state.value }}">{{ state }}</option>-->
-<!--                                    {% endfor %}-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-6">-->
-<!--                            <label for="lname">Zip/Postal Code</label>-->
-<!--                            <input type="text" id="zippostalcode" name="postcode" class="form-control"-->
-<!--                                   placeholder="Zip / Postal" value="{{ form.postcode.value }}">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <div class="col-md-6">-->
-<!--                            <label for="Phone">Phone Number</label>-->
-<!--                            <input type="text" id="zippostalcode" name="phone" class="form-control"-->
-<!--                                   placeholder="" value="{{ form.phone.value }}">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <div class="col-md-12">-->
-<!--                            {#                            <div class="radio">#}-->
-<!--                            {#                                <label><input type="radio" name="optradio">Create an Account?#}-->
-<!--                            {#                                </label>#}-->
-<!--                            {#                                <label><input type="radio" name="optradio"> Ship to different#}-->
-<!--                            {#                                    address</label>#}-->
-<!--                            {#                            </div>#}-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <input type="submit" class="btn btn-primary" value="Сохранить">-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <hr>-->
-<!--    <div class="row">-->
-<!--        <div class="col-md-4">-->
-<!--            {#        <a href="{% url 'customer:checkMe' user.id %}"><button type="submit" class="btn btn-success btn-md" name="button">Proceed To Pay</button></a>#}-->
-<!--        </div>-->
-<!--        <div class="col-md-4">-->
-<!--            {#       <a href="{% url 'customer:view_profile' user.id %}"><button type="submit" class="btn btn-success btn-md" name="button">See your billing info </button></a>#}-->
-<!--        </div>-->
-<!--    </div>-->

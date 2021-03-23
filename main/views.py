@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from account.models import ProfileUserModel
 from .forms import create_thickness_ground_plate_form
 from .models import *
 from django.shortcuts import render
@@ -7,22 +8,28 @@ from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-menu = [{'title': "Шлифовка - Толщина Шлифованой плиты", 'url_name': 'plate'},
-        {'title': "Шлифовка - Учёт шлифовальных материалов", 'url_name': 'about-me'},
-        {'title': "Шлифовка - Толщина пакета шлифованной плиты", 'url_name': 'about-me'},
-        {'title': "Пресс - Форма контроля раб. состояния форсунок САП", 'url_name': 'about-me'},
-        {'title': "Пресс - Форма очистки лент преса", 'url_name': 'about-me'},
-        {'title': "Пресс - толщина нешлифованой плиты", 'url_name': 'about-me'},
-        {'title': "Пресс и Сушилка - Расход природного газа и древесной пыли", 'url_name': 'about-me'},
-        {'title': "Пресс - Производственные параметры для пресовщика", 'url_name': 'about-me'},
-        {'title': "Распиловка - Учёт замены чернильной системы", 'url_name': 'about-me'},
-        {'title': "Распиловка - Измерение покоробленности", 'url_name': 'about-me'},
-        {'title': "Распиловка - Толщина пакета нешлифованой плиты", 'url_name': 'about-me'}
+menu = [{'title_place': "Шлифовка",'name_form':'Толщина Шлифованой плиты', 'url_name': 'plate'},
+        {'title_place': "Шлифовка",'name_form':'Учёт шлифовальных материалов', 'url_name': 'about-me'},
+        {'title_place': "Шлифовка",'name_form':'Толщина пакета шлифованной плиты', 'url_name': 'about-me'},
+        {'title_place': "Пресс",'name_form':'Форма контроля раб. состояния форсунок САП', 'url_name': 'about-me'},
+        {'title_place': "Пресс",'name_form':'Форма очистки лент преса', 'url_name': 'about-me'},
+        {'title_place': "Пресс",'name_form':'Толщина нешлифованой плиты', 'url_name': 'about-me'},
+        {'title_place': "Пресс и Сушилка",'name_form':'Расход природного газа и древесной пыли', 'url_name': 'about-me'},
+        {'title_place': "Пресс",'name_form':'Производственные параметры для пресовщика', 'url_name': 'about-me'},
+        {'title_place': "Распиловка",'name_form':'Учёт замены чернильной системы', 'url_name': 'about-me'},
+        {'title_place': "Распиловка",'name_form':'Измерение покоробленности', 'url_name': 'about-me'},
+        {'title_place': "Распиловка",'name_form':'Толщина пакета нешлифованой плиты', 'url_name': 'about-me'}
 ]
 
-
 def index(request):
-    context = {'menu':menu, 'title':'Главная страница'}
+
+
+    profile = ProfileUserModel.objects.all()
+    context = {
+        'menu': menu,
+        'title': 'Главная страница',
+        'profile': profile,
+    }
 
     return render(request, 'main/index.html', context=context)
 

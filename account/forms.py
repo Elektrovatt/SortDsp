@@ -29,11 +29,13 @@ class profile_form(forms.ModelForm):
     widgets = {
         "value1": TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Видимость формы 1'
+            'placeholder': 'Видимость формы 1',
+            'label':'Видимость формы 1'
         }),
         "value2": TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Видимость формы 1'
+            'placeholder': 'Видимость формы 1',
+            'label': 'Видимость формы 1'
         }),
     }
 
@@ -54,11 +56,13 @@ class ProfileForm(forms.ModelForm):
     widgets = {
         "value1": TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Видимость формы 1'
+            'placeholder': 'Видимость формы 1',
+            'label': 'Видимость формы 11'
         }),
         "value2": TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Видимость формы 1'
+            'placeholder': 'Видимость формы 1',
+            'label': 'Видимость формы 1'
         }),
     }
 

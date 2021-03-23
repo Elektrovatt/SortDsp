@@ -69,6 +69,13 @@ TEMPLATES = [
         },
     },
 ]
+TEMPLATE_CONTEXT_PROCESSORS = [
+    'django.contrib.auth.context_processors.auth',
+]
+
+
+
+
 
 WSGI_APPLICATION = 'sortDSP.wsgi.application'
 
@@ -107,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+AUTH_PROFILE_MODULE = 'models.ProfileUserModel'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

@@ -57,12 +57,33 @@ class ProfileView(LoginRequiredMixin, DetailView):
     context_object_name = 'profile'
     form_class = profile_form
 
+    def get_context_data(self, *, object_list=None,  **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+
+
+        return context
+
+
+menu = [{'title_place': "Шлифовка",'name_form':'Толщина Шлифованой плиты', 'url_name': 'plate'},
+        {'title_place': "Шлифовка",'name_form':'Учёт шлифовальных материалов', 'url_name': 'about-me'},
+        {'title_place': "Шлифовка",'name_form':'Толщина пакета шлифованной плиты', 'url_name': 'about-me'},
+        {'title_place': "Пресс",'name_form':'Форма контроля раб. состояния форсунок САП', 'url_name': 'about-me'},
+        {'title_place': "Пресс",'name_form':'Форма очистки лент преса', 'url_name': 'about-me'},
+        {'title_place': "Пресс",'name_form':'Толщина нешлифованой плиты', 'url_name': 'about-me'},
+        {'title_place': "Пресс и Сушилка",'name_form':'Расход природного газа и древесной пыли', 'url_name': 'about-me'},
+        {'title_place': "Пресс",'name_form':'Производственные параметры для пресовщика', 'url_name': 'about-me'},
+        {'title_place': "Распиловка",'name_form':'Учёт замены чернильной системы', 'url_name': 'about-me'},
+        {'title_place': "Распиловка",'name_form':'Измерение покоробленности', 'url_name': 'about-me'},
+        {'title_place': "Распиловка",'name_form':'Толщина пакета нешлифованой плиты', 'url_name': 'about-me'}
+]
 
 
 
 
 class ProfileUpdate(LoginRequiredMixin, UpdateView):
-        """"Редактирование профиля"""
+        """"Редактирование профиля"""""
+
         model = ProfileUserModel
         template_name = "account/profile_update.html"
         context_object_name = 'profile'
@@ -75,7 +96,8 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
 
         def get_context_data(self, **kwargs):
             kwargs['update'] = True
-            return super().get_context_data(**kwargs)
+            context = super().get_context_data(**kwargs)
+            return context
 
         def form_valid(self, form):
             return super().form_valid(form)

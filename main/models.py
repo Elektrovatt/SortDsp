@@ -2,10 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+from account.models import ProfileUserModel
+
+
 class table_thickness_ground_plate_model(models.Model):
     #добавить 8  измерений шлифованной плиты
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", blank=True, null=True)
     number_shift = models.CharField(max_length=1, null=True, verbose_name='Номер смены')
+    # number_shift = models.ForeignKey(ProfileUserModel, on_delete=models.PROTECT, null=True, verbose_name='Номер смены')
+
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
     value0 = models.CharField(max_length=2, null=True, verbose_name='Толщина плиты')
     value1 = models.CharField(max_length=5, null=True, verbose_name='Значение 1')
