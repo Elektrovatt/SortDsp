@@ -29,15 +29,43 @@ class Customer(models.Model):
 
 class ProfileUserModel(models.Model):
     """"Модель профиля пользователя"""""
+    area = (
+        ('Шлифовка', 'Шлифовка'),
+        ('Распиловка', 'Распиловка'),
+        ('Пресс', 'Пресс'),
+        ('Формовка', 'Формовка'),
+        ('Клееварка', 'Клееварка'),
+        ('Сушилка', 'Сушилка'),
+        ('Стружечное', 'Стружечное'),
+        ('Заточка', 'Заточка'),
+        ('Дробилка', 'Дробилка'),
+    )
+    number_shift = (
+
+        ('Смена 1', 'Смена 1'),
+        ('Смена 2', 'Смена 2'),
+        ('Смена 3', 'Смена 3'),
+        ('Смена 4', 'Смена 4'),
+    )
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Владелец записи, пользователь")
-    is_customer = models.BooleanField("Видимость формы 1", default=False, help_text='100 characters max.')
-    is_customer2 = models.BooleanField("Видимость формы 2", default=False)
-    value1 = models.CharField(max_length=100, null=True, verbose_name='ссылка')
-    value2 = models.CharField(max_length=50, null=True, verbose_name='смена №')
-    value3 = models.CharField(max_length=50, null=True, verbose_name='Участок', help_text='Дробилка, стружка, сушилка, клееварка, формовка, пресс, распиловка, щлифовка')
+    name_form1 = models.BooleanField("Толщина Шлифованой плиты", default=False, help_text='Участок - Шлифовка')
+    name_form2 = models.BooleanField("Учёт шлифовальных материалов", default=False, help_text='Участок - Шлифовка')
+    name_form3 = models.BooleanField("Толщина пакета шлифованной плиты", default=False, help_text='Участок - Шлифовка')
+    name_form4 = models.BooleanField("Толщина пакета нешлифованой плиты", default=False, help_text='Участок - Распиловка')
+    name_form5 = models.BooleanField("Измерение покоробленности", default=False, help_text='Участок - Распиловка')
+    name_form6 = models.BooleanField("Учёт замены чернильной системы", default=False, help_text='Участок - Распиловка')
+    name_form7 = models.BooleanField("Производственные параметры для пресовщика", default=False, help_text='Участок - Пресс')
+    name_form8 = models.BooleanField("Расход природного газа и древесной пыли", default=False, help_text='Участок - Пресс')
+    name_form9 = models.BooleanField("Толщина нешлифованой плиты", default=False, help_text='Участок - Пресс')
+    name_form10 = models.BooleanField("Форма очистки лент преса", default=False, help_text='Участок - Пресс')
+    name_form11 = models.BooleanField("Форма контроля рабочего состояния форсунок САП", default=False, help_text='Участок - Пресс')
+    value2 = models.CharField(choices=number_shift, max_length=50, null=True, verbose_name='смена №')
+    value3 = models.CharField(choices=area, max_length=500, null=True, verbose_name='Участок', help_text='дробилка, стружка. заточка, сушилка, клееварка, формовка, пресс, распиловка, шлифовка')
+
 
     def __str__(self):
-        return ('автор  %s, Видимость: %s, смена : %s. участок : %s.' % (self.user, self.is_customer, self.value2, self.value3))
+        return ('автор  %s, смена : %s. участок : %s.' % (self.user, self.value2, self.value3))
 
     # def get_absolute_url(self):
     #     return f'/profile/{self.pk}'

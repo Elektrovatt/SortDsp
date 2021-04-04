@@ -24,20 +24,22 @@ class profile_form(forms.ModelForm):
 
     class Meta:
         model = ProfileUserModel
-        fields = ['is_customer','is_customer2','value1','value2','value3']
+        fields = ['name_form1',
+                  'name_form2','name_form3','name_form4','name_form5','name_form6',
+                  'name_form7','name_form8','name_form9','name_form10','name_form11','value2','value3']
 
-    widgets = {
-        "value1": TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Видимость формы 1',
-            'label':'Видимость формы 1'
-        }),
-        "value2": TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Видимость формы 1',
-            'label': 'Видимость формы 1'
-        }),
-    }
+    # widgets = {
+    #     "value1": TextInput(attrs={
+    #         'class': 'form-control',
+    #         'placeholder': 'Видимость формы 1',
+    #         'label':'Видимость формы 1'
+    #     }),
+    #     "value2": TextInput(attrs={
+    #         'class': 'form-control',
+    #         'placeholder': 'Видимость формы 1',
+    #         'label': 'Видимость формы 1'
+    #     }),
+    # }
 
     def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
@@ -50,21 +52,23 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = ProfileUserModel
-        fields = ['is_customer','is_customer2','value1','value2','value3']
+        fields = ['name_form1',
+                  'name_form2', 'name_form3', 'name_form4', 'name_form5', 'name_form6',
+                  'name_form7', 'name_form8', 'name_form9', 'name_form10', 'name_form11', 'value2', 'value3']
         # fields = ('__all__')
 
-    widgets = {
-        "value1": TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Видимость формы 1',
-            'label': 'Видимость формы 11'
-        }),
-        "value2": TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Видимость формы 1',
-            'label': 'Видимость формы 1'
-        }),
-    }
+    # widgets = {
+    #     "value1": TextInput(attrs={
+    #         'class': 'form-control',
+    #         'placeholder': 'Видимость формы 1',
+    #         'label': 'Видимость формы 11'
+    #     }),
+    #     "value2": TextInput(attrs={
+    #         'class': 'form-control',
+    #         'placeholder': 'Видимость формы 1',
+    #         'label': 'Видимость формы 1'
+    #     }),
+    # }
 
     def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)

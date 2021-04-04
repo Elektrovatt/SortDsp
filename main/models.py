@@ -21,6 +21,8 @@ class table_thickness_ground_plate_model(models.Model):
     value7 = models.CharField(max_length=5, null=True, verbose_name='Значение 7')
     value8 = models.CharField(max_length=5, null=True, verbose_name='Значение 8')
 
+
+
     def __str__(self):
         return ('Смена № %s, плита: %s, дата: %s.' %(self.number_shift, self.value0, self.date_created))
 
