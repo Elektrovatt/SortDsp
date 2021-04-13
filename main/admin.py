@@ -10,3 +10,11 @@ class table_thickness_ground_plate_modelAdmin(admin.ModelAdmin):
     search_fields = ('author', )
 
 admin.site.register(table_thickness_ground_plate_model, table_thickness_ground_plate_modelAdmin)
+
+
+class Table_Pack_Board_Model_Admin(admin.ModelAdmin):
+    list_display = ('id', 'author', 'date_created')
+    list_display_links = ('id', 'author')
+    search_fields = ('author', )
+
+admin.site.register(Table_Pack_Board_Model, Table_Pack_Board_Model_Admin)

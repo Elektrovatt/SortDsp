@@ -52,9 +52,9 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = ProfileUserModel
-        fields = ['name_form1',
+        fields = ['value2', 'value3','name_form1',
                   'name_form2', 'name_form3', 'name_form4', 'name_form5', 'name_form6',
-                  'name_form7', 'name_form8', 'name_form9', 'name_form10', 'name_form11', 'value2', 'value3']
+                  'name_form7', 'name_form8', 'name_form9', 'name_form10', 'name_form11' ]
         # fields = ('__all__')
 
     # widgets = {

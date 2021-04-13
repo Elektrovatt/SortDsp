@@ -30,6 +30,7 @@ class Customer(models.Model):
 class ProfileUserModel(models.Model):
     """"Модель профиля пользователя"""""
     area = (
+        ('All', 'All'),
         ('Шлифовка', 'Шлифовка'),
         ('Распиловка', 'Распиловка'),
         ('Пресс', 'Пресс'),
@@ -49,6 +50,9 @@ class ProfileUserModel(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Владелец записи, пользователь")
+    value2 = models.CharField(choices=number_shift, max_length=50, null=True, verbose_name='смена №')
+    value3 = models.CharField(choices=area, max_length=500, null=True, verbose_name='Участок',
+                              help_text='дробилка, стружка. заточка, сушилка, клееварка, формовка, пресс, распиловка, шлифовка')
     name_form1 = models.BooleanField("Толщина Шлифованой плиты", default=False, help_text='Участок - Шлифовка')
     name_form2 = models.BooleanField("Учёт шлифовальных материалов", default=False, help_text='Участок - Шлифовка')
     name_form3 = models.BooleanField("Толщина пакета шлифованной плиты", default=False, help_text='Участок - Шлифовка')
@@ -60,9 +64,8 @@ class ProfileUserModel(models.Model):
     name_form9 = models.BooleanField("Толщина нешлифованой плиты", default=False, help_text='Участок - Пресс')
     name_form10 = models.BooleanField("Форма очистки лент преса", default=False, help_text='Участок - Пресс')
     name_form11 = models.BooleanField("Форма контроля рабочего состояния форсунок САП", default=False, help_text='Участок - Пресс')
-    value2 = models.CharField(choices=number_shift, max_length=50, null=True, verbose_name='смена №')
-    value3 = models.CharField(choices=area, max_length=500, null=True, verbose_name='Участок', help_text='дробилка, стружка. заточка, сушилка, клееварка, формовка, пресс, распиловка, шлифовка')
-
+    """"Расход газа Ness и воды на SAP - пресс, расход Газа и древесной пылина сушилке.
+    Общую создаёт нач смены? или одна запись с правами редактирования пресса и сушилки """""
 
     def __str__(self):
         return ('автор  %s, смена : %s. участок : %s.' % (self.user, self.value2, self.value3))

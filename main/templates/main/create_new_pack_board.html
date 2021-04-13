@@ -1,13 +1,13 @@
 {% extends 'main/base.html' %}
 {% block title %}
-Форма по добавлению толщины плиты
+{{ title }}
 {% endblock %}
 
 <div class="container">
 
 
     {% block content %}
-         <p><a href="{% url 'plate' %}">Вернуться назад</a></p>
+         <p><a href="{% url 'pack-board' %}">Вернуться назад</a></p>
                 <form method="post">
                         {% csrf_token %}
 

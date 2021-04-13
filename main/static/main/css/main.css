@@ -24,6 +24,7 @@ aside img {
     align-content: center;
     text-align: center;
 }
+
 .align-middle {
     text-align: center;
 }
@@ -41,3 +42,6 @@ aside img {
    margin-top: 5px;
 }
 
+.pack-width{
+    width:105px;
+}

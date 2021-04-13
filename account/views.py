@@ -60,14 +60,13 @@ class ProfileView(LoginRequiredMixin, DetailView):
     def get_context_data(self, *, object_list=None,  **kwargs):
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
-
-
         return context
+
 
 
 menu = [{'title_place': "Шлифовка",'name_form':'Толщина Шлифованой плиты', 'url_name': 'plate'},
         {'title_place': "Шлифовка",'name_form':'Учёт шлифовальных материалов', 'url_name': 'about-me'},
-        {'title_place': "Шлифовка",'name_form':'Толщина пакета шлифованной плиты', 'url_name': 'about-me'},
+        {'title_place': "Шлифовка",'name_form':'Толщина пакета шлифованной плиты', 'url_name': 'pack-board'},
         {'title_place': "Пресс",'name_form':'Форма контроля раб. состояния форсунок САП', 'url_name': 'about-me'},
         {'title_place': "Пресс",'name_form':'Форма очистки лент преса', 'url_name': 'about-me'},
         {'title_place': "Пресс",'name_form':'Толщина нешлифованой плиты', 'url_name': 'about-me'},
