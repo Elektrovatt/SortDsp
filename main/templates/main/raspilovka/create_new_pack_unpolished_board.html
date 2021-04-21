@@ -1,15 +1,16 @@
 {% extends 'main/base.html' %}
 {% block title %}
-
 {{ title }}
 {% endblock %}
 
-<div class="container">
-    {% block content %}
-    <p><a href="{% url 'pack-board' %}">Вернуться назад</a></p>
+{% block content %}
+<div class="container-fluid">
+         <p><a href="{% url 'list-unpolished-pack-board' %}">Вернуться назад</a></p>
                 <form method="post">
                         {% csrf_token %}
+
                         {% for f in form %}
+
                             <div class="form-group row">
                                 <label for="{{ f.id_for_label }}" class="col-sm-4 col-form-label">{{f.label}}:</label>
                                     <div class="col-sm-3">
@@ -18,9 +19,11 @@
 
                             </div>
                             <div class="form-error"> {{ f.errors }}</div>
+
                         {% endfor%}
+
                     <span>{{ error }}</span>
                     <button class="btn btn-success" type="submit">Сохранить</button>
                 </form>
-    {% endblock %}
 </div>
+{% endblock %}

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from account.models import ProfileUserModel
 
 
-class table_thickness_ground_plate_model(models.Model):
+class Thickness_board_model(models.Model):
     #добавить 8  измерений шлифованной плиты
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", blank=True, null=True)
     # number_shift = models.ForeignKey(ProfileUserModel, on_delete=models.PROTECT, null=True, verbose_name='Номер смены')
@@ -25,15 +25,15 @@ class table_thickness_ground_plate_model(models.Model):
         return ('Смена № %s, плита: %s, дата: %s.' %(self.author, self.value0, self.date_created))
 
     def get_absolute_url(self):
-         return f'/plate/{self.pk}'
+         return f'/board/{self.pk}'
 
     class Meta:
             verbose_name = 'поля'
-            verbose_name_plural = 'Толщина плиты'
+            verbose_name_plural = 'Шлифвока - Толщина шлифованной плиты'
             ordering = ('-date_created',)
 
 
-class Table_Pack_Board_Model(models.Model):
+class Thickness_pack_board_model(models.Model):
     #добавить 22  измеренияпачки
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
@@ -65,9 +65,125 @@ class Table_Pack_Board_Model(models.Model):
         return ('Смена № %s, плита: %s, дата: %s.' %(self.author, self.value0, self.date_created))
 
     def get_absolute_url(self):
-         return f'/pack/{self.pk}'
+         return f'/thickness-pack-board/{self.pk}'
 
     class Meta:
             verbose_name = 'поля'
-            verbose_name_plural = 'Толщина пачки'
+            verbose_name_plural = 'Шлифвока - Толщина шлифованной пачки'
+            ordering = ('-date_created',)
+
+
+class Thickness_unpolished_pack_board_model(models.Model):
+    #добавить 22  измеренияпачки
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
+    value0 = models.CharField(max_length=2, null=True, verbose_name='Толщина плиты')
+    value1 = models.CharField(max_length=5, null=True, verbose_name='Значение 1')
+    value2 = models.CharField(max_length=5, null=True, verbose_name='Значение 2')
+    value3 = models.CharField(max_length=5, null=True, verbose_name='Значение 3')
+    value4 = models.CharField(max_length=5, null=True, verbose_name='Значение 4')
+    value5 = models.CharField(max_length=5, null=True, verbose_name='Значение 5')
+    value6 = models.CharField(max_length=5, null=True, verbose_name='Значение 6')
+    value7 = models.CharField(max_length=5, null=True, verbose_name='Значение 7')
+    value8 = models.CharField(max_length=5, null=True, verbose_name='Значение 8')
+    value9 = models.CharField(max_length=5, null=True, verbose_name='Значение 9')
+    value10 = models.CharField(max_length=5, null=True, verbose_name='Значение 10')
+    value11 = models.CharField(max_length=5, null=True, verbose_name='Значение 11')
+    value12 = models.CharField(max_length=5, null=True, verbose_name='Значение 12')
+    value13 = models.CharField(max_length=5, null=True, verbose_name='Значение 13')
+    value14 = models.CharField(max_length=5, null=True, verbose_name='Значение 14')
+    value15 = models.CharField(max_length=5, null=True, verbose_name='Значение 15')
+    value16 = models.CharField(max_length=5, null=True, verbose_name='Значение 16')
+    value17 = models.CharField(max_length=5, null=True, verbose_name='Значение 17')
+    value18 = models.CharField(max_length=5, null=True, verbose_name='Значение 18')
+    value19 = models.CharField(max_length=5, null=True, verbose_name='Значение 19')
+    value20 = models.CharField(max_length=5, null=True, verbose_name='Значение 20')
+    value21 = models.CharField(max_length=5, null=True, verbose_name='Значение 21')
+    value22 = models.CharField(max_length=5, null=True, verbose_name='Значение 22')
+
+    def __str__(self):
+        return ('Смена № %s, плита: %s, дата: %s.' %(self.author, self.value0, self.date_created))
+
+    def get_absolute_url(self):
+         return f'/thickness-unpolished-pack-board/{self.pk}'
+
+    class Meta:
+            verbose_name = 'поля'
+            verbose_name_plural = 'Распиловка - Толщина не шлифованой пачки'
+            ordering = ('-date_created',)
+
+
+class Thickness_unpolished_board_model(models.Model):
+    #добавить 8  измерений нешлифованной плиты
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
+    value0 = models.CharField(max_length=2, null=True, verbose_name='Толщина плиты')
+    value1 = models.CharField(max_length=5, null=True, verbose_name='Значение 1')
+    value2 = models.CharField(max_length=5, null=True, verbose_name='Значение 2')
+    value3 = models.CharField(max_length=5, null=True, verbose_name='Значение 3')
+    value4 = models.CharField(max_length=5, null=True, verbose_name='Значение 4')
+    value5 = models.CharField(max_length=5, null=True, verbose_name='Значение 5')
+
+
+    def __str__(self):
+        return ('Смена № %s, плита: %s, дата: %s.' %(self.author, self.value0, self.date_created))
+
+    def get_absolute_url(self):
+         return f'/thickness-unpolished-board/{self.pk}'
+
+    class Meta:
+            verbose_name = 'поля'
+            verbose_name_plural = 'Пресс - Толщина нешлифованой плиты'
+            ordering = ('-date_created',)
+
+
+class Number_tapes_model(models.Model):
+    "Учёт шлифовальных материалов"
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", )
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата замены лент')
+    date_update = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
+    Agg1 = (
+        ('', ''),
+        ('P 50', 'P 50'),
+        ('P 80', 'P 80'),
+        ('P 120', 'P 120'),
+    )
+    Agg2 = (
+        ('', ''),
+        ('Foam', 'Foam'),
+        ('Pes', 'Pes'),
+    )
+
+    number_1_1_choices = models.CharField(max_length=20, blank=True, null=True, choices=Agg1, verbose_name='Лента 1.1')
+    value0 = models.CharField(max_length=20, blank=True, null=True, verbose_name='Пробег ленты Agg 1.1')
+    number_1_2_choices = models.CharField(max_length=20, blank=True, null=True,choices=Agg1, verbose_name='Лента 1.2')
+    value1 = models.CharField(max_length=20, blank=True, null=True, verbose_name='Пробег ленты Agg 1.2')
+
+    number_2_1_choices = models.CharField(max_length=20,blank=True, null=True, choices=Agg1, verbose_name='Лента 2.1')
+    liner_2_1_choices = models.CharField(max_length=20, blank=True, null=True, choices=Agg2, verbose_name='Вставка 2.1')
+    value2 = models.CharField(max_length=20,blank=True, null=True,  verbose_name='Пробег ленты Agg 2.1')
+
+    number_2_2_choices = models.CharField(max_length=20, blank=True, null=True,choices=Agg1, verbose_name='Лента 2.2')
+    liner_2_2_choices = models.CharField(max_length=20,  blank=True, null=True,choices=Agg2, verbose_name='Вставка 2.2')
+    value3 = models.CharField(max_length=20, blank=True, null=True, verbose_name='Пробег ленты Agg 2.2')
+
+    number_2_3_choices = models.CharField(max_length=20,  blank=True, null=True,choices=Agg1, verbose_name='Лента 2.3')
+    liner_2_3_choices = models.CharField(max_length=20, blank=True, null=True,choices=Agg2, verbose_name='Вставка 2.3')
+    value4 = models.CharField(max_length=20,blank=True, null=True,  verbose_name='Пробег ленты Agg 2.3')
+
+    number_2_4_choices = models.CharField(max_length=20, blank=True, null=True, choices=Agg1, verbose_name='Лента 2.4')
+    liner_2_4_choices = models.CharField(max_length=20, blank=True, null=True, choices=Agg2, verbose_name='Вставка 2.4')
+    value5 = models.CharField(max_length=20, blank=True, null=True, verbose_name='Пробег ленты Agg 2.4')
+
+
+
+    def __str__(self):
+        return ('Смена № %s, дата: %s.' %(self.author, self.date_created))
+
+    def get_absolute_url(self):
+         return f'/number-tapes-liner/{self.pk}'
+
+    class Meta:
+            verbose_name = 'поля'
+            verbose_name_plural = 'Шлифвока - Учёт шлифовальных лент'
             ordering = ('-date_created',)

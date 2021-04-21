@@ -3,20 +3,18 @@
 {{ title }}
 {% endblock %}
 
-<div class="container">
-
-
-    {% block content %}
+{% block content %}
+<div class="container-fluid">
          <p><a href="{% url 'pack-board' %}">Вернуться назад</a> </p>
     <p>Вы действительно хотите удалить эту запись?</p>
                 <form method="post">
                         {% csrf_token %}
                      {{ form.number_shift }}<br>
 
-                    <button class="btn btn-success" type="submit">Да, удалить</button>
+                    <button class="btn mb-2 btn-success" type="submit">Да, удалить</button>
                 </form>
 
-
-    {% endblock %}
-
 </div>
+{% endblock %}
+
+

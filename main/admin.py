@@ -4,17 +4,38 @@ from django.contrib import admin
 
 from .models import *
 
-class table_thickness_ground_plate_modelAdmin(admin.ModelAdmin):
+class Thickness_board_model_Admin(admin.ModelAdmin):
+    list_display = ('id', 'author', 'date_created')
+    list_display_links = ('id', 'author')
+    search_fields = ('author', )
+admin.site.register(Thickness_board_model, Thickness_board_model_Admin)
+
+
+class Thickness_pack_board_model_Admin(admin.ModelAdmin):
+    list_display = ('id', 'author', 'date_created')
+    list_display_links = ('id', 'author')
+    search_fields = ('author', )
+admin.site.register(Thickness_pack_board_model, Thickness_pack_board_model_Admin)
+
+
+class Thickness_unpolished_board_model_Admin(admin.ModelAdmin):
+    list_display = ('id', 'author', 'date_created')
+    list_display_links = ('id', 'author')
+    search_fields = ('author', )
+admin.site.register(Thickness_unpolished_board_model, Thickness_unpolished_board_model_Admin)
+
+
+class Thickness_unpolished_pack_board_model_Admin(admin.ModelAdmin):
     list_display = ('id', 'author', 'date_created')
     list_display_links = ('id', 'author')
     search_fields = ('author', )
 
-admin.site.register(table_thickness_ground_plate_model, table_thickness_ground_plate_modelAdmin)
+admin.site.register(Thickness_unpolished_pack_board_model, Thickness_unpolished_pack_board_model_Admin)
 
 
-class Table_Pack_Board_Model_Admin(admin.ModelAdmin):
+class Number_tapes_model_Admin(admin.ModelAdmin):
     list_display = ('id', 'author', 'date_created')
     list_display_links = ('id', 'author')
     search_fields = ('author', )
 
-admin.site.register(Table_Pack_Board_Model, Table_Pack_Board_Model_Admin)
+admin.site.register(Number_tapes_model, Number_tapes_model_Admin)

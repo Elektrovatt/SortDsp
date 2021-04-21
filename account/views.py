@@ -64,20 +64,18 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
 
 
-menu = [{'title_place': "Шлифовка",'name_form':'Толщина Шлифованой плиты', 'url_name': 'plate'},
-        {'title_place': "Шлифовка",'name_form':'Учёт шлифовальных материалов', 'url_name': 'about-me'},
+menu = [{'title_place': "Шлифовка",'name_form':'Толщина Шлифованой плиты', 'url_name': 'board'},
+        {'title_place': "Шлифовка",'name_form':'Учёт шлифовальных материалов', 'url_name': 'list-number-tapes'},
         {'title_place': "Шлифовка",'name_form':'Толщина пакета шлифованной плиты', 'url_name': 'pack-board'},
         {'title_place': "Пресс",'name_form':'Форма контроля раб. состояния форсунок САП', 'url_name': 'about-me'},
         {'title_place': "Пресс",'name_form':'Форма очистки лент преса', 'url_name': 'about-me'},
-        {'title_place': "Пресс",'name_form':'Толщина нешлифованой плиты', 'url_name': 'about-me'},
+        {'title_place': "Пресс",'name_form':'Толщина нешлифованой плиты', 'url_name': 'list-unpolished-board'},
         {'title_place': "Пресс и Сушилка",'name_form':'Расход природного газа и древесной пыли', 'url_name': 'about-me'},
         {'title_place': "Пресс",'name_form':'Производственные параметры для пресовщика', 'url_name': 'about-me'},
         {'title_place': "Распиловка",'name_form':'Учёт замены чернильной системы', 'url_name': 'about-me'},
         {'title_place': "Распиловка",'name_form':'Измерение покоробленности', 'url_name': 'about-me'},
-        {'title_place': "Распиловка",'name_form':'Толщина пакета нешлифованой плиты', 'url_name': 'about-me'}
+        {'title_place': "Распиловка",'name_form':'Толщина пакета нешлифованой плиты', 'url_name': 'list-unpolished-pack-board'}
 ]
-
-
 
 
 class ProfileUpdate(LoginRequiredMixin, UpdateView):

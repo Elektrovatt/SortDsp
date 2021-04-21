@@ -18,11 +18,15 @@ aside img {
   height: 42px;
 }
 
+.main_table{
 
+}
 
 .th1{
     align-content: center;
     text-align: center;
+    width: 100%;
+    white-space: nowrap;
 }
 
 .align-middle {
