@@ -35,21 +35,17 @@ class CustomThicknessBoardMixin:
     success_url = reverse_lazy('board')
 
 
-
 class List_thickness_board_view(CustomThicknessBoardMixin, ListView):
     """" Класс для отображения всех записей. Cмена, дата измерения плиты
-    таблица измерений толщины плиты, тоже самое что и def add_table_thickness_ground_plate(request):"""""
-
+    таблица измерений толщины плиты"""
     template_name = 'main/shlifovka/board.html'
     context_object_name = 'list_value'
     extra_context = {'title': 'Толщина плиты'}
 
 
-
-
-
-class Create_thickness_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin, CustomThicknessBoardMixin, CreateView):
-    """"Класс для создания новой записи с измерениями толщины плиты. Тоже самое что и def create(request):"""""
+class Create_thickness_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
+                                  CustomThicknessBoardMixin, CreateView):
+    """Класс для создания новой записи с измерениями толщины плиты."""
     template_name = 'main/shlifovka/create_new_board.html'
     success_msg = 'Запись создана'
     extra_context = {'title':'Толщина плиты'}
@@ -60,9 +56,9 @@ class Create_thickness_board_view(LoginRequiredMixin, CustomSuccessMessageMixin,
         return super().get_context_data(**kwargs)
 
 
-class Update_thickness_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin, CustomThicknessBoardMixin, CustomGetFormUpdateMixin, UpdateView):
-    """"#Класс для редактирования записи
-     Тоже самое что и def update_table(request, pk):   """""
+class Update_thickness_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
+                                  CustomThicknessBoardMixin, CustomGetFormUpdateMixin, UpdateView):
+    """Класс для редактирования записи"""
     form_class = Thickness_board_form
     template_name = 'main/shlifovka/board_update.html'
     success_msg = 'Запись успешно обнавлена'
@@ -77,8 +73,6 @@ class Delete_thickness_board_view(LoginRequiredMixin, CustomPostDeleteMixin, Cus
     template_name = 'main/delete.html'
     success_msg = 'Запись удалена'
     extra_context = {'title': 'Форма для удаления плиты.'}
-
-
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -294,7 +288,7 @@ class Update_number_tapes_view(LoginRequiredMixin, CustomSuccessMessageMixin, Cu
                                   CustomNumberTapesMixin, CustomGetFormUpdateMixin, UpdateView):
 
     form_class = Number_tapes_form
-    template_name = 'main/update.html'
+    template_name = 'main/shlifovka/create_new_number_tapes.html'
     success_msg = 'Запись успешно обнавлена'
     extra_context = {'title': 'Изменение значений пробега лент'}
 
@@ -323,10 +317,68 @@ class Delete_number_tapes_view(LoginRequiredMixin, CustomPostDeleteMixin, Custom
         return context
 
 
+""" Начало {'title_place': "Распиловка",'name_form':'Лабораторные образцы', 'url_name': 'list-lab-board'}"""
+
+
+class CustomLabBoardMixin:
+    model = Lab_board_model
+    success_url = reverse_lazy('list-lab-board')
+
+
+class List_lab_board_view(CustomLabBoardMixin, ListView):
+    template_name = 'main/raspilovka/list_lab_board.html'
+    context_object_name = 'list_value'
+    extra_context = {'title': 'Лабораторные образцы'}
+
+
+class Create_lab_board_view(LoginRequiredMixin, CustomSuccessMessageMixin,
+                                  CustomFormValidMixin, CustomLabBoardMixin, CreateView):
+
+    form_class = Lab_board_form
+    template_name = 'main/raspilovka/create_new_lab_board.html'
+    success_msg = 'Запись создана'
+    extra_context = {'title':'Шлифовальные ленты'}
+
+
+    def get_context_data(self, **kwargs):
+        kwargs['list_articles'] = Lab_board_model.objects.all().order_by('-date_created')
+        return super().get_context_data(**kwargs)
+
+
+class Update_lab_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
+                                  CustomLabBoardMixin, CustomGetFormUpdateMixin, UpdateView):
+
+    form_class = Lab_board_form
+    template_name = 'main/raspilovka/create_new_lab_board.html'
+    success_msg = 'Запись успешно обнавлена'
+    extra_context = {'title': 'Изменение значений о лабораторном образце'}
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['update'] = True
+        context['menu'] = menu
+        context['url'] = 'list-lab-board'
+        return context
+
+
+class Delete_lab_board_view(LoginRequiredMixin, CustomPostDeleteMixin, CustomLabBoardMixin, DeleteView):
+    template_name = 'main/delete.html'
+    success_msg = 'Запись удалена'
+    extra_context = {'title': 'Форма для удаления записи лабораторного образца'}
+
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['url'] = 'list-lab-board'
+        return context
+
+
+"""" Конец {'title_place': "Распиловка",'name_form':'Лабораторные образцы', 'url_name': 'list-lab-board'} """
+
+
+
 
 """" Конец {'title_place': "Шлифовка",'name_form':'Учёт шлифовальных лент', 'url_name': 'number-tapes'} """
-
-
 def about(request):
     return render(request, 'main/about.html')
 

@@ -42,7 +42,7 @@ urlpatterns = [
     path('unpolished_board_pack_delete/<int:pk>', views.Delete_thickness_unpolished_pack_board_view.as_view(),
          name='delete-unpolished-pack-board'),
 
-    path('list_number_tapes', views.List_number_tapes_view.as_view(),
+     path('list_number_tapes', views.List_number_tapes_view.as_view(),
          name='list-number-tapes'),
     path('number_tapes_create', views.Create_number_tapes_view.as_view(),
          name='create-number-tapes'),
@@ -50,4 +50,15 @@ urlpatterns = [
          name='update-number-tapes'),
     path('number_tapes_delete/<int:pk>', views.Delete_number_tapes_view.as_view(),
          name='delete-number-tapes'),
+
+    path('list_lab_board', views.List_lab_board_view.as_view(),
+         name='list-lab-board'),
+    path('lab_board_create', views.Create_lab_board_view.as_view(),
+         name='create-lab-board'),
+    path('lab_board_update/<int:pk>', views.Update_lab_board_view.as_view(),
+         name='update-lab-board'),
+    path('lab_board_delete/<int:pk>', views.Delete_lab_board_view.as_view(),
+         name='delete-lab-board'),
+
+
 ]

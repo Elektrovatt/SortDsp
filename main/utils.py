@@ -13,7 +13,11 @@ menu = [{'title_place': "Шлифовка",'name_form':'Толщина Шлиф�
         {'title_place': "Пресс",'name_form':'Производственные параметры для пресовщика', 'url_name': 'about-me'},
         {'title_place': "Распиловка",'name_form':'Учёт замены чернильной системы', 'url_name': 'about-me'},
         {'title_place': "Распиловка",'name_form':'Измерение покоробленности', 'url_name': 'about-me'},
-        {'title_place': "Распиловка",'name_form':'Толщина пакета нешлифованой плиты', 'url_name': 'list-unpolished-pack-board'}
+        {'title_place': "Распиловка",'name_form':'Толщина пакета нешлифованой плиты', 'url_name': 'list-unpolished-pack-board'},
+        {'title_place': "Распиловка", 'name_form': 'Лабораторные образцы',
+         'url_name': 'list-lab-board'},
+
+
 ]
 class CustomSuccessMessageMixin:
     """" для появления записи о обновления поля или добавлении нового  подсвечивается редактированая запись"""""
@@ -73,5 +77,3 @@ class CustomPostDeleteMixin:
         success_url = self.get_success_url()
         self.object.delete()
         return HttpResponseRedirect(success_url)
-
-

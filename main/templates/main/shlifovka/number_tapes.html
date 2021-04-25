@@ -34,16 +34,24 @@
                     <td class="align-middle"> {{ i.author.last_name }}</td>
                     <td class="align-middle">{{ i.date_created|date:'d.m.Y H:i' }}</td>
                     <td>
-                        {{ i.number_1_1_choices|default_if_none:"" }} - {{ i.value0|default_if_none:"" }}<br>
-                        {{ i.number_1_2_choices|default_if_none:"" }} - {{ i.value1|default_if_none:"" }}</td>
-                    <td>{{ i.number_2_1_choices|default_if_none:"" }}
-                         {{ i.liner_2_1_choices|default_if_none:"" }} - {{ i.value2|default_if_none:"" }}<br>
-                        {{ i.number_2_2_choices|default_if_none:"" }}
-                        {{ i.liner_2_2_choices|default_if_none:"" }} - {{ i.value3|default_if_none:"" }}</td>
-                    <td>{{ i.number_2_3_choices|default_if_none:"" }}
-                        {{ i.liner_2_3_choices|default_if_none:"" }} - {{ i.value4|default_if_none:"" }}<br>
-                        {{ i.number_2_4_choices|default_if_none:"" }}
-                        {{ i.liner_2_4_choices|default_if_none:"" }} - {{ i.value5|default_if_none:"" }}</td>
+
+                        {{ i.number_1_1_choices|default_if_none:"" }} - {{ i.number_1_1_choices2|default_if_none:"" }}
+                        - {{ i.value0|default_if_none:"" }}<br>
+                        {{ i.number_1_2_choices|default_if_none:"" }} - {{ i.number_1_2_choices2|default_if_none:"" }}
+                        - {{ i.value1|default_if_none:"" }}
+                    </td>
+                    <td>{{ i.number_2_1_choices|default_if_none:"" }} - {{ i.number_2_1_choices2|default_if_none:"" }}
+                        {{ i.liner_2_1_choices|default_if_none:"" }} {{ i.value2|default_if_none:"" }}
+                        <br>
+                        {{ i.number_2_2_choices|default_if_none:"" }} - {{ i.number_2_2_choices2|default_if_none:"" }}
+                        {{ i.liner_2_2_choices|default_if_none:"" }} - {{ i.value3|default_if_none:"" }}
+                    </td>
+                    <td>{{ i.number_2_3_choices|default_if_none:"" }} - {{ i.number_2_3_choices2|default_if_none:"" }}
+                        {{ i.liner_2_3_choices|default_if_none:"" }} - {{ i.value4|default_if_none:"" }}
+                        <br>
+                        {{ i.number_2_4_choices|default_if_none:"" }} - {{ i.number_2_4_choices2|default_if_none:"" }}
+                        {{ i.liner_2_4_choices|default_if_none:"" }} - {{ i.value5|default_if_none:"" }}
+                    </td>
 
                   <td class="align-middle">{{ i.date_update|date:'d.m.Y H:i' }}</td>
                     <td class="align-middle">

@@ -7,19 +7,80 @@
 <div class="container-fluid">
          <p><a href="{% url 'list-number-tapes' %}">Вернуться назад</a></p>
         <form method="post">
-                        {% csrf_token %}
-                        {% for f in form %}
+                            {% csrf_token %}
                             <div class="form-group row">
-                                <label for="{{ f.id_for_label }}" class="col-sm-4 col-form-label">{{f.label}}:</label>
-                                    <div class="col-sm-3">
-                                      {{ f }}
+                                    <div class="card border-primary mb-3 m-1" style="max-width: 480px; max-height: 480px">
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">1.1</h5>
+                                            {{ form.number_1_1_choices.label }}{{ form.number_1_1_choices }}
+                                              {{ form.number_1_1_choices2.label }}{{ form.number_1_1_choices2 }}
+                                             {{ form.value0.label }}{{ form.value0 }}
+                                        </div>
+                                    </div>
+                                    <div class="card border-primary mb-3 m-1" style="max-width: 480px; max-height: 480px">
+
+                                        <div class="card-body">
+                                             <h5 class="card-title">2.1</h5>
+                                            {{ form.number_2_1_choices.label }}{{ form.number_2_1_choices }}
+                                            {{ form.number_2_1_choices2.label }}{{ form.number_2_1_choices2 }}
+                                            {{ form.liner_2_1_choices.label }}{{ form.liner_2_1_choices }}
+                                            {{ form.value2.label }}{{ form.value2 }}
+                                        </div>
+                                    </div>
+
+                                    <div class="card border-primary mb-3 m-1" style="max-width: 480px; max-height: 480px">
+
+                                        <div class="card-body">
+                                             <h5 class="card-title">2.3</h5>
+                                            {{ form.number_2_3_choices.label }}{{ form.number_2_3_choices }}
+                                            {{ form.number_2_3_choices2.label }}{{ form.number_2_3_choices2 }}
+                                            {{ form.liner_2_3_choices.label }}{{ form.liner_2_3_choices }}
+                                            {{ form.value4.label }}{{ form.value4 }}
+                                        </div>
                                     </div>
                             </div>
-                            <div class="form-error"> {{ f.errors }}</div>
-                        {% endfor%}
+                            <div class="form-group row">
+                                    <div class="card border-primary mb-3 m-1" style="max-width: 480px; max-height: 480px">
+
+                                        <div class="card-body">
+                                             <h5 class="card-title">1.2</h5>
+                                            {{ form.number_1_2_choices.label }}{{ form.number_1_2_choices }}
+                                              {{ form.number_1_2_choices2.label }}{{ form.number_1_2_choices2 }}
+                                             {{ form.value1.label }}{{ form.value1 }}
+                                        </div>
+                                    </div>
+
+                                 <div class="card border-primary mb-3 m-1" style="max-width: 480px; max-height: 480px">
+
+                                    <div class="card-body">
+                                         <h5 class="card-title">2.2</h5>
+                                        {{ form.number_2_2_choices.label }}{{ form.number_2_2_choices }}
+                                        {{ form.number_2_2_choices2.label }}{{ form.number_2_2_choices2 }}
+                                        {{ form.liner_2_2_choices.label }}{{ form.liner_2_2_choices }}
+                                        {{ form.value3.label }}{{ form.value3 }}
+                                    </div>
+                                </div>
+                                <div class="card border-primary mb-3 m-1" style="max-width: 480px; max-height: 480px">
+
+                                    <div class="card-body">
+                                         <h5 class="card-title">2.4</h5>
+                                        {{ form.number_2_4_choices.label }}{{ form.number_2_4_choices }}
+                                        {{ form.number_2_4_choices2.label }}{{ form.number_2_4_choices2 }}
+                                        {{ form.liner_2_4_choices.label }}{{ form.liner_2_4_choices }}
+                                        {{ form.value5.label }}{{ form.value5 }}
+                                    </div>
+                                </div>
+                            </div>
+                    <div class="form-error"> {{ f.errors }}</div>
                     <span>{{ error }}</span>
                     <button class="btn  mb-2 btn-success" type="submit">Сохранить</button>
         </form>
 </div>
 {% endblock %}
 
+<!--                            <div class="form-group row">-->
+<!--                                <label for="{{ f.id_for_label }}" class="col-sm-4 col-form-label">{{f.label}}:</label>-->
+<!--                                    <div class="col-sm-3">-->
+<!--                                      {{ i }}-->
+<!--                                    </div>-->

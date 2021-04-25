@@ -127,40 +127,121 @@ class Thickness_unpolished_board_form(ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
 
-
 class Number_tapes_form(ModelForm):
+    Agg1 = (
+        ('', ''),
+        ('P 50', 'P 50'),
+        ('P 80', 'P 80'),
+        ('P 120', 'P 120'),
+    )
+    Agg2 = (
+        ('', ''),
+        ('Foam', 'Foam'),
+        ('Pes', 'Pes'),
+    )
+    Agg3 = (
+        ('', ''),
+        ('Combi', 'Combi'),
+        ('Polyster', 'Polyster'),
+    )
+    number_1_1_choices = forms.ChoiceField(choices=Agg1, label='Выберите зернистость', required=False)
+    number_1_1_choices2 = forms.ChoiceField(choices=Agg3, label='Выберите тип ленты', required=False)
+    value0 = forms.CharField(max_length=25, label='Введите пробег ленты 1.1', empty_value="", required=False)
+
+    number_1_2_choices = forms.ChoiceField(choices=Agg1, label='Выберите зернистость', required=False)
+    number_1_2_choices2 = forms.ChoiceField(choices=Agg3, label='Выберите тип ленты' ,required=False)
+    value1 = forms.CharField(max_length=25, label='Введите пробег ленты 1.2', empty_value="", required=False)
+
+    number_2_1_choices = forms.ChoiceField(choices=Agg1, label='Выберите зернистость', required=False)
+    number_2_1_choices2 = forms.ChoiceField(choices=Agg3, label='Выберите тип ленты', required=False)
+    liner_2_1_choices = forms.ChoiceField(choices=Agg2, label='Выберите вкладыш', required=False)
+    value2 = forms.CharField(max_length=25, label='Введите пробег ленты 2.1', empty_value="", required=False)
+
+    number_2_2_choices = forms.ChoiceField(choices=Agg1, label='Выберите зернистость', required=False)
+    number_2_2_choices2 = forms.ChoiceField(choices=Agg3, label='Выберите тип ленты', required=False)
+    liner_2_2_choices = forms.ChoiceField(choices=Agg2, label='Выберите вкладыш', required=False)
+    value3 = forms.CharField(max_length=25, label='Введите пробег ленты 2.2', empty_value="", required=False)
+
+    number_2_3_choices = forms.ChoiceField(choices=Agg1, label='Выберите зернистость', required=False)
+    number_2_3_choices2 = forms.ChoiceField(choices=Agg3, label='Выберите тип ленты', required=False)
+    liner_2_3_choices = forms.ChoiceField(choices=Agg2, label='Выберите вкладыш', required=False)
+    value4 = forms.CharField(max_length=25, label='Введите пробег ленты 1.1', empty_value="", required=False)
+
+    number_2_4_choices = forms.ChoiceField(choices=Agg1, label='Выберите зернистость', required=False)
+    number_2_4_choices2 = forms.ChoiceField(choices=Agg3, label='Выберите тип ленты', required=False)
+    liner_2_4_choices = forms.ChoiceField(choices=Agg2, label='Выберите вкладыш', required=False)
+    value5 = forms.CharField(max_length=25, label='Введите пробег ленты 1.1', empty_value="", required=False)
+
     class Meta:
         model = Number_tapes_model
         fields = [
-                  'number_1_1_choices', 'value0',
-                  'number_1_2_choices', 'value1',
-                  'number_2_1_choices','value2','liner_2_1_choices',
-                  'number_2_2_choices','value3','liner_2_2_choices',
-                  'number_2_3_choices','value4', 'liner_2_3_choices',
-                  'number_2_4_choices','value5','liner_2_4_choices']
-        # # widgets = {
-        # #     "is_customer": TextInput(attrs={'class': 'form-control', 'placeholder': 'Автор'}),
-        # #     "number_1_1_choices": TextInput(attrs={'class': 'form-control', 'placeholder': 'Толщина плиты, мм'}),
-        # #     "value0": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 1'}),
-        # #     "number_1_2_choices": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 2'}),
-        # #     "value1": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 3'}),
-        # #     "number_2_1_choices": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 4'}),
-        # #     "value2": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 5'}),
-        # #     "liner_2_1_choices": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 6'}),
-        # #     "number_2_2_choices": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 7'}),
-        # #     "value3": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 8'}),
-        # #     "liner_2_2_choices": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 9'}),
-        # #     "number_2_3_choices": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 10'}),
-        # #     "value4": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 11'}),
-        # #     "liner_2_3_choices": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 12'}),
-        # #     "number_2_4_choices": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 13'}),
-        # #     "value5": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 14'}),
-        # #     "liner_2_4_choices": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 15'}),
-        #
-        # }
+                  'number_1_1_choices', 'number_1_1_choices2','value0',
+                  'number_1_2_choices', 'number_1_2_choices2','value1',
+                  'number_2_1_choices','number_2_1_choices2','value2','liner_2_1_choices',
+                  'number_2_2_choices','number_2_2_choices2','value3','liner_2_2_choices',
+                  'number_2_3_choices','number_2_3_choices2','value4', 'liner_2_3_choices',
+                  'number_2_4_choices','number_2_4_choices2','value5','liner_2_4_choices']
+        widgets = {
+
+            "value0": TextInput(attrs={'class': 'form-control', 'placeholder': 'Пробег 1.1'}),
+            "value1": TextInput(attrs={'class': 'form-control', 'placeholder': 'Пробег 1.2'}),
+            "value2": TextInput(attrs={'class': 'form-control', 'placeholder': 'Пробег 2.1'}),
+            "value3": TextInput(attrs={'class': 'form-control', 'placeholder': 'Пробег 2.2'}),
+            "value4": TextInput(attrs={'class': 'form-control', 'placeholder': 'Пробег 2.3'}),
+            "value5": TextInput(attrs={'class': 'form-control', 'placeholder': 'Пробег 2.4'}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
 
+
+class Lab_board_form(ModelForm):
+    # Number_shift = (
+    #     ('choice', 'Выберите смену'),
+    #     ('1', '1'),
+    #     ('2', '2'),
+    #     ('3', '3'),
+    #     ('4', '4'),
+    # )
+    # Number_shift1 = (
+    #     ('choice', 'Выберите партию'),
+    #     ('1', '1'),
+    #     ('2', '2'),
+    #     ('3', '3'),
+    #     ('4', '4'),
+    # )
+    # date_created = forms.DateField(widget=TextInput(attrs={'class': 'form-control', 'placeholder': 'Дата производства'}),
+    #     label="Дата производства")
+    # number_shift = forms.ChoiceField(choices=Number_shift,label="Смена производства")
+    # number_path = forms.ChoiceField(choices=Number_shift1,label="Партия")
+    # value0 = forms.CharField(widget=TextInput(attrs={'class': 'form-control', 'placeholder': 'Заказ'}),
+    #                          max_length=4,label="Заказ")
+    # value1 = forms.CharField(widget=TextInput(attrs={'class': 'form-control', 'placeholder': 'Толщина, мм'}),
+    #                          max_length=2,label="Толщина, мм")
+    # value2 = forms.CharField(widget=TextInput(attrs={'class': 'form-control', 'placeholder': 'Длинна, мм'}),
+    #                          max_length=4,label="Длинна, мм")
+    # value3 = forms.CharField(widget=TextInput(attrs={'class': 'form-control', 'placeholder': 'Количество, шт.'}),
+    #                          max_length=1,label="Количество, шт.")
+    # value4 = forms.CharField(widget=TextInput(attrs={'class': 'form-control', 'placeholder': 'Комментарий'}),
+    #                         max_length=30,required=False,label="Комментарий"),
+
+    class Meta:
+        model = Lab_board_model
+        fields = ['date_created', 'number_shift', 'number_path', 'value0', 'value1', 'value2','value3','value4' ]
+        widgets = {
+                "date_created": TextInput(attrs={'class': 'form-control', 'placeholder': 'Дата производства'}),
+                # "number_shift": TextInput(attrs={'choices': 'form-control', 'placeholder': 'Смена производства'}),
+                # "number_path": TextInput(attrs={'class': 'form-control', 'placeholder': 'Партия'}),
+                "value0": TextInput(attrs={'class': 'form-control', 'placeholder': 'Заказ'}),
+                "value1": TextInput(attrs={'class': 'form-control', 'placeholder': 'Толщина, мм'}),
+                "value2": TextInput(attrs={'class': 'form-control', 'placeholder': 'Длинна, мм'}),
+                "value3": TextInput(attrs={'class': 'form-control', 'placeholder': 'Количество, шт.'}),
+                "value4": TextInput(attrs={'class': 'form-control', 'placeholder': 'Комментарий'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'

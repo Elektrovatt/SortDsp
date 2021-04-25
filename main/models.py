@@ -6,6 +6,8 @@ from account.models import ProfileUserModel
 
 
 class Thickness_board_model(models.Model):
+    # from main.models import Thickness_board_model импорт для shell
+
     #добавить 8  измерений шлифованной плиты
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", blank=True, null=True)
     # number_shift = models.ForeignKey(ProfileUserModel, on_delete=models.PROTECT, null=True, verbose_name='Номер смены')
@@ -22,7 +24,8 @@ class Thickness_board_model(models.Model):
     value8 = models.CharField(max_length=5, null=True, verbose_name='Значение 8')
 
     def __str__(self):
-        return ('Смена № %s, плита: %s, дата: %s.' %(self.author, self.value0, self.date_created))
+        return ('Смена №# %s, плита: %s, дата: %s. %s-%s-%s-%s-%s-%s-%s-%s' %(self.author, self.value0, self.date_created,
+            self.value1,self.value2,self.value3,self.value4,self.value5,self.value6,self.value7,self.value8 ))
 
     def get_absolute_url(self):
          return f'/board/{self.pk}'
@@ -136,12 +139,8 @@ class Thickness_unpolished_board_model(models.Model):
             verbose_name_plural = 'Пресс - Толщина нешлифованой плиты'
             ordering = ('-date_created',)
 
-
 class Number_tapes_model(models.Model):
     "Учёт шлифовальных материалов"
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", )
-    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата замены лент')
-    date_update = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
     Agg1 = (
         ('', ''),
         ('P 50', 'P 50'),
@@ -153,25 +152,47 @@ class Number_tapes_model(models.Model):
         ('Foam', 'Foam'),
         ('Pes', 'Pes'),
     )
+    Agg3 = (
+        ('', ''),
+        ('Combi', 'Combi'),
+        ('Polyster', 'Polyster'),
+    )
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", )
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата замены лент')
+    date_update = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
 
     number_1_1_choices = models.CharField(max_length=20, blank=True, null=True, choices=Agg1, verbose_name='Лента 1.1')
+    number_1_1_choices2 = models.CharField(max_length=20, blank=True, null=True, choices=Agg3,
+                                           verbose_name='Тип ленты 1.1')
     value0 = models.CharField(max_length=20, blank=True, null=True, verbose_name='Пробег ленты Agg 1.1')
-    number_1_2_choices = models.CharField(max_length=20, blank=True, null=True,choices=Agg1, verbose_name='Лента 1.2')
+
+    number_1_2_choices = models.CharField(max_length=20, blank=True, null=True,choices=Agg1,
+                                          verbose_name='Лента 1.2')
+    number_1_2_choices2 = models.CharField(max_length=20, blank=True, null=True, choices=Agg3,
+                                           verbose_name='Тип ленты 1.2')
     value1 = models.CharField(max_length=20, blank=True, null=True, verbose_name='Пробег ленты Agg 1.2')
 
     number_2_1_choices = models.CharField(max_length=20,blank=True, null=True, choices=Agg1, verbose_name='Лента 2.1')
+    number_2_1_choices2 = models.CharField(max_length=20, blank=True, null=True, choices=Agg3,
+                                           verbose_name='Тип ленты 2.1')
     liner_2_1_choices = models.CharField(max_length=20, blank=True, null=True, choices=Agg2, verbose_name='Вставка 2.1')
     value2 = models.CharField(max_length=20,blank=True, null=True,  verbose_name='Пробег ленты Agg 2.1')
 
     number_2_2_choices = models.CharField(max_length=20, blank=True, null=True,choices=Agg1, verbose_name='Лента 2.2')
+    number_2_2_choices2 = models.CharField(max_length=20, blank=True, null=True, choices=Agg3,
+                                           verbose_name='Тип ленты 2.2')
     liner_2_2_choices = models.CharField(max_length=20,  blank=True, null=True,choices=Agg2, verbose_name='Вставка 2.2')
     value3 = models.CharField(max_length=20, blank=True, null=True, verbose_name='Пробег ленты Agg 2.2')
 
     number_2_3_choices = models.CharField(max_length=20,  blank=True, null=True,choices=Agg1, verbose_name='Лента 2.3')
+    number_2_3_choices2 = models.CharField(max_length=20, blank=True, null=True, choices=Agg3,
+                                           verbose_name='Тип ленты 2.3')
     liner_2_3_choices = models.CharField(max_length=20, blank=True, null=True,choices=Agg2, verbose_name='Вставка 2.3')
     value4 = models.CharField(max_length=20,blank=True, null=True,  verbose_name='Пробег ленты Agg 2.3')
 
     number_2_4_choices = models.CharField(max_length=20, blank=True, null=True, choices=Agg1, verbose_name='Лента 2.4')
+    number_2_4_choices2 = models.CharField(max_length=20, blank=True, null=True, choices=Agg3,
+                                           verbose_name='Тип ленты 2.4')
     liner_2_4_choices = models.CharField(max_length=20, blank=True, null=True, choices=Agg2, verbose_name='Вставка 2.4')
     value5 = models.CharField(max_length=20, blank=True, null=True, verbose_name='Пробег ленты Agg 2.4')
 
@@ -186,4 +207,37 @@ class Number_tapes_model(models.Model):
     class Meta:
             verbose_name = 'поля'
             verbose_name_plural = 'Шлифвока - Учёт шлифовальных лент'
+            ordering = ('-date_created',)
+
+class Lab_board_model(models.Model):
+    """добавить лабораторную плиту"""
+    Number_shift = (
+        ('', ''),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+    )
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", blank=True, null=True)
+    date_created = models.DateField(auto_now=False, auto_now_add=False, verbose_name='Дата производства' )
+    number_shift = models.CharField(max_length=1, choices=Number_shift, verbose_name='Смена (производства)№')
+    number_path = models.CharField(max_length=1,choices=Number_shift, verbose_name='Номер партии')
+    value0 = models.CharField(max_length=4,  verbose_name='Заказ')
+    value1 = models.CharField(max_length=2, verbose_name='Толщина, мм')
+    value2 = models.CharField(max_length=4, null=True, verbose_name='Длина, мм')
+    value3 = models.CharField(max_length=1, null=True, verbose_name='Количество, шт.')
+    value4 = models.CharField(max_length=30, null=True,blank=True, verbose_name='Комментарий')
+
+
+
+    def __str__(self):
+        return ('Смена производства № %s, заказ - %s, плита: %s - %s, дата производства: %s.'
+                %(self.number_shift, self.value1,self.value1,self.value2, self.date_created))
+
+    def get_absolute_url(self):
+         return f'/lab-board/{self.pk}'
+
+    class Meta:
+            verbose_name = 'поля'
+            verbose_name_plural = 'Распиловка - Лабораторные образцы'
             ordering = ('-date_created',)
