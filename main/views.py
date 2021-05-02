@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .utils import *
 
+
 def index(request):
 
     profile = ProfileUserModel.objects.all()
@@ -31,14 +32,24 @@ def index(request):
 
 
 class CustomThicknessBoardMixin:
+    """Базовый класс для формы по измерению Толщины Плиты
+    Чтобы не повторять get_context_data(кроме DeleteView), model and success_url - вынесены в этот класс"""
     model = Thickness_board_model
     success_url = reverse_lazy('board')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        kwargs['list_articles'] = Thickness_board_model.objects.all().order_by('-date_created')
+        kwargs['update'] = True
+        context = super().get_context_data(**kwargs)
+        context['url'] = 'board'
+        context['menu'] = menu
+        return context
 
 
 class List_thickness_board_view(CustomThicknessBoardMixin, ListView):
     """" Класс для отображения всех записей. Cмена, дата измерения плиты
     таблица измерений толщины плиты"""
-    template_name = 'main/shlifovka/board.html'
+    template_name = 'main/shlifovka/list_board.html'
     context_object_name = 'list_value'
     extra_context = {'title': 'Толщина плиты'}
 
@@ -46,38 +57,26 @@ class List_thickness_board_view(CustomThicknessBoardMixin, ListView):
 class Create_thickness_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
                                   CustomThicknessBoardMixin, CreateView):
     """Класс для создания новой записи с измерениями толщины плиты."""
+    form_class = Thickness_board_form
     template_name = 'main/shlifovka/create_new_board.html'
     success_msg = 'Запись создана'
     extra_context = {'title':'Толщина плиты'}
-    form_class = Thickness_board_form
-
-    def get_context_data(self, **kwargs):
-        kwargs['list_articles'] = Thickness_board_model.objects.all().order_by('-date_created')
-        return super().get_context_data(**kwargs)
 
 
 class Update_thickness_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
                                   CustomThicknessBoardMixin, CustomGetFormUpdateMixin, UpdateView):
     """Класс для редактирования записи"""
     form_class = Thickness_board_form
-    template_name = 'main/shlifovka/board_update.html'
     success_msg = 'Запись успешно обнавлена'
+    template_name = 'main/update.html'
     extra_context = {'title': 'Изменение значений толщины плиты'}
-
-    def get_context_data(self, **kwargs):
-        kwargs['update'] = True
-        return super().get_context_data(**kwargs)
 
 
 class Delete_thickness_board_view(LoginRequiredMixin, CustomPostDeleteMixin, CustomThicknessBoardMixin, DeleteView):
     template_name = 'main/delete.html'
-    success_msg = 'Запись удалена'
     extra_context = {'title': 'Форма для удаления плиты.'}
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['url'] = 'board'
-        return context
+
 
 """" Конец {'title_place': "Шлифовка",'name_form':'Толщина Шлифованой плиты', 'url_name': 'board'} """
 
@@ -85,22 +84,25 @@ class Delete_thickness_board_view(LoginRequiredMixin, CustomPostDeleteMixin, Cus
 """" Начало {'title_place': "Шлифовка",'name_form':'Толщина пакета шлифованной плиты', 'url_name': 'pack-board'} """
 
 
-class List_thickness_pack_board_view(ListView):
-    """" Класс для отображения всех записей. Cмена, дата измерения пачки
-    таблица измерений толщины пачки    """""
-
+class CustomThicknessPackBoad:
     model = Thickness_pack_board_model
-    template_name = 'main/shlifovka/pack_board.html'
+    success_url = reverse_lazy('pack-board')
+
+
+class List_thickness_pack_board_view(CustomThicknessPackBoad, ListView):
+    """ Класс для отображения всех записей. Cмена, дата измерения пачки
+    таблица измерений толщины пачки    """
+    template_name = 'main/shlifovka/list_pack_board.html'
     context_object_name = 'list_value'
     extra_context = {'title':'Толщина пачки шлифованой плиты'}
 
 
-class Create_thickness_pack_board_view(LoginRequiredMixin, CustomSuccessMessageMixin,CustomFormValidMixin, CreateView):
-    """"Класс для создания новой записи с измерениями пачки. """""
-    model = Thickness_pack_board_model
+class Create_thickness_pack_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
+                                       CustomThicknessPackBoad, CreateView):
+    """Класс для создания новой записи с измерениями пачки. """
+
     template_name = 'main/shlifovka/create_new_pack_board.html'
     form_class = Thickness_pack_board_form
-    success_url = reverse_lazy('pack-board')
     success_msg = 'Запись создана'
     extra_context = {'title': 'Форма    по    добавлению   значений   отшлифованой    пачки'}
 
@@ -109,13 +111,11 @@ class Create_thickness_pack_board_view(LoginRequiredMixin, CustomSuccessMessageM
         return super().get_context_data(**kwargs)
 
 
-class Update_thickness_pack_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin, CustomGetFormUpdateMixin, UpdateView):
-    """"Класс для редактирования записи"""""
-
-    model = Thickness_pack_board_model
-    template_name = 'main/shlifovka/pack_board_update.html'
+class Update_thickness_pack_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
+                                       CustomThicknessPackBoad, CustomGetFormUpdateMixin, UpdateView):
+    """Класс для редактирования записи"""
+    template_name = 'main/shlifovka/create_new_pack_board.html'
     form_class = Thickness_pack_board_form
-    success_url = reverse_lazy('pack-board')
     success_msg = 'Запись успешно обнавлена'
     extra_context = {'title': 'Форма для редактирования значений толщины пачки'}
 
@@ -124,11 +124,8 @@ class Update_thickness_pack_board_view(LoginRequiredMixin, CustomSuccessMessageM
         return super().get_context_data(**kwargs)
 
 
-class Delete_thickness_pack_board_view(LoginRequiredMixin, CustomPostDeleteMixin, DeleteView):
-    model = Thickness_pack_board_model
+class Delete_thickness_pack_board_view(LoginRequiredMixin, CustomPostDeleteMixin, CustomThicknessPackBoad, DeleteView):
     template_name = 'main/delete.html'
-    success_url = reverse_lazy('pack-board')
-    success_msg = 'Запись удалена'
     extra_context = {'title': 'Форма для удаления значений толщины пачки.'}
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -138,41 +135,39 @@ class Delete_thickness_pack_board_view(LoginRequiredMixin, CustomPostDeleteMixin
 
 """" Конец {'title_place': "Шлифовка",'name_form':'Толщина пакета шлифованной плиты', 'url_name': 'pack-board'}, """
 
+
 """" Начало {'title_place': "Пресс",'name_form':'Толщина нешлифованой плиты', 'url_name': 'list-unpolished-board'}, """
 
-
-class List_thickness_unpolished_board_view(ListView):
-    """" Класс для отображения всех записей. Cмена, дата измерения плиты
-    таблица измерений толщины плиты, тоже самое что и def add_table_thickness_ground_plate(request):"""""
-
+class CustomThicknessUnpolishedBoad:
     model = Thickness_unpolished_board_model
-    template_name = 'main/press/list_unpolished_board.html.html'
+    success_url = reverse_lazy('list-unpolished-board')
+
+
+class List_thickness_unpolished_board_view(CustomThicknessUnpolishedBoad, ListView):
+    """ Класс для отображения всех записей. Cмена, дата измерения плиты
+    таблица измерений толщины плиты, тоже самое что и def add_table_thickness_ground_plate(request):"""
+    template_name = 'main/press/list_unpolished_board.html'
     context_object_name = 'list_value'
     extra_context = {'title': 'Толщина нешлифованой плиты'}
 
 
-class Create_thickness_unpolished_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin, CreateView):
-    """"Класс для создания новой записи с измерениями толщины плиты. Тоже самое что и def create(request):"""""
-
-    model = Thickness_unpolished_board_model
+class Create_thickness_unpolished_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
+                                             CustomThicknessUnpolishedBoad, CreateView):
+    """"Класс для создания новой записи с измерениями толщины плиты. :"""
     template_name = 'main/press/create_new_thickness_unpolished_board.html'
     form_class = Thickness_unpolished_board_form
-    success_url = reverse_lazy('list-unpolished-board')
     success_msg = 'Запись создана'
-    extra_context = {'title':'Толщина нешлифованой плиты'}
+    extra_context = {'title': 'Толщина нешлифованой плиты'}
 
     def get_context_data(self, **kwargs):
         kwargs['list_articles'] = Thickness_unpolished_board_model.objects.all().order_by('-date_created')
         return super().get_context_data(**kwargs)
 
 
-class Update_thickness_unpolished_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin, CustomGetFormUpdateMixin, UpdateView):
-    """"#Класс для редактирования записи    """""
-
-    model = Thickness_unpolished_board_model
-    template_name = 'main/press/update_unpolished_board.html'
+class Update_thickness_unpolished_board_view(LoginRequiredMixin, CustomSuccessMessageMixin,CustomFormValidMixin,
+                                             CustomGetFormUpdateMixin, CustomThicknessUnpolishedBoad, UpdateView):
+    template_name = 'main/press/create_new_thickness_unpolished_board.html'
     form_class = Thickness_unpolished_board_form
-    success_url = reverse_lazy('list-unpolished-board')
     success_msg = 'Запись успешно обнавлена'
     extra_context = {'title': 'Изменение значений  толщины нешлифованой плиты'}
 
@@ -181,11 +176,9 @@ class Update_thickness_unpolished_board_view(LoginRequiredMixin, CustomSuccessMe
         return super().get_context_data(**kwargs)
 
 
-class Delete_thickness_unpolished_board_view(LoginRequiredMixin, CustomPostDeleteMixin, DeleteView):
-    model = Thickness_unpolished_board_model
+class Delete_thickness_unpolished_board_view(LoginRequiredMixin, CustomPostDeleteMixin, CustomThicknessUnpolishedBoad,
+                                             DeleteView):
     template_name = 'main/delete.html'
-    success_url = reverse_lazy('list-unpolished-board')
-    success_msg = 'Запись удалена'
     extra_context = {'title': 'Форма для удаления значений нешлифованой плиты.'}
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -196,26 +189,29 @@ class Delete_thickness_unpolished_board_view(LoginRequiredMixin, CustomPostDelet
 """" Конец {'title_place': "Пресс",'name_form':'Толщина нешлифованой плиты', 'url_name': 'list-unpolished-board'}, """
 
 
-"""" Начало {'title_place': "Распиловка",'name_form':'Толщина пакета нешлифованой плиты', 'url_name': 'list-unpolished-pack-board'} """
+""" Начало {'title_place': "Распиловка",'name_form':'Толщина пакета нешлифованой плиты', 'url_name': 'list-unpolished-pack-board'} """
 
 
-class List_thickness_unpolished_pack_board_view(ListView):
-    """" Класс для отображения всех записей. Cмена, дата измерения плиты
-    таблица измерений толщины нешлифованой пачки"""""
-
+class CustomThicknessUnpolishedPackBoard:
     model = Thickness_unpolished_pack_board_model
-    template_name = 'main/raspilovka/pack_unpolished_board.html'
+    success_url = reverse_lazy('list-unpolished-pack-board')
+
+
+class List_thickness_unpolished_pack_board_view(CustomThicknessUnpolishedPackBoard, ListView):
+    """ Класс для отображения всех записей. Cмена, дата измерения плиты
+    таблица измерений толщины нешлифованой пачки"""
+
+    template_name = 'main/raspilovka/list_pack_unpolished_board.html'
     context_object_name = 'list_value'
     extra_context = {'title': 'Толщина пакета нешлифованой плиты'}
 
 
-class Create_thickness_unpolished_pack_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin, CreateView):
+class Create_thickness_unpolished_pack_board_view(LoginRequiredMixin, CustomSuccessMessageMixin,
+                                                  CustomFormValidMixin,CustomThicknessUnpolishedPackBoard, CreateView):
     """"Класс для создания новой записи с измерениями толщины пакета нешлифованой плиты."""""
 
-    model = Thickness_unpolished_pack_board_model
     template_name = 'main/raspilovka/create_new_pack_unpolished_board.html'
     form_class = Thickness_unpolished_pack_board_form
-    success_url = reverse_lazy('list-unpolished-pack-board')
     success_msg = 'Запись создана'
     extra_context = {'title':'Толщина пакета нешлифованой плиты'}
 
@@ -224,13 +220,10 @@ class Create_thickness_unpolished_pack_board_view(LoginRequiredMixin, CustomSucc
         return super().get_context_data(**kwargs)
 
 
-class Update_thickness_unpolished_pack_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin, CustomGetFormUpdateMixin, UpdateView):
-    """"#Класс для редактирования записи значений толщины пакета нешлифованой плиты   """""
-
-    model = Thickness_unpolished_pack_board_model
-    template_name = 'main/raspilovka/pack_unpolished_board_update.html'
+class Update_thickness_unpolished_pack_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
+                                                  CustomThicknessUnpolishedPackBoard, CustomGetFormUpdateMixin, UpdateView):
+    template_name = 'main/raspilovka/create_new_pack_unpolished_board.html'
     form_class = Thickness_unpolished_pack_board_form
-    success_url = reverse_lazy('list-unpolished-pack-board')
     success_msg = 'Запись успешно обнавлена'
     extra_context = {'title': 'Изменение значений  толщины пакета нешлифованой плиты'}
 
@@ -239,10 +232,9 @@ class Update_thickness_unpolished_pack_board_view(LoginRequiredMixin, CustomSucc
         return super().get_context_data(**kwargs)
 
 
-class Delete_thickness_unpolished_pack_board_view(LoginRequiredMixin, CustomPostDeleteMixin, DeleteView):
-    model = Thickness_unpolished_pack_board_model
+class Delete_thickness_unpolished_pack_board_view(LoginRequiredMixin, CustomThicknessUnpolishedPackBoard,
+                                                  CustomPostDeleteMixin, DeleteView):
     template_name = 'main/delete.html'
-    success_url = reverse_lazy('list-unpolished-pack-board')
     success_msg = 'Запись удалена'
     extra_context = {'title': 'Форма для удаления значений пачки нешлифованой плиты.'}
 
@@ -257,15 +249,13 @@ class Delete_thickness_unpolished_pack_board_view(LoginRequiredMixin, CustomPost
 """" Начало {'title_place': "Шлифовка",'name_form':'Учёт шлифовальных материалов', 'url_name': 'number-tapes'} """
 
 
-
 class CustomNumberTapesMixin:
     model = Number_tapes_model
     success_url = reverse_lazy('list-number-tapes')
 
 
-
 class List_number_tapes_view(CustomNumberTapesMixin, ListView):
-    template_name = 'main/shlifovka/number_tapes.html'
+    template_name = 'main/shlifovka/list_number_tapes.html'
     context_object_name = 'list_value'
     extra_context = {'title': 'Шлифовальные ленты'}
 
@@ -278,7 +268,6 @@ class Create_number_tapes_view(LoginRequiredMixin, CustomSuccessMessageMixin,
     success_msg = 'Запись создана'
     extra_context = {'title':'Шлифовальные ленты'}
 
-
     def get_context_data(self, **kwargs):
         kwargs['list_articles'] = Number_tapes_model.objects.all().order_by('-date_created')
         return super().get_context_data(**kwargs)
@@ -286,7 +275,6 @@ class Create_number_tapes_view(LoginRequiredMixin, CustomSuccessMessageMixin,
 
 class Update_number_tapes_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
                                   CustomNumberTapesMixin, CustomGetFormUpdateMixin, UpdateView):
-
     form_class = Number_tapes_form
     template_name = 'main/shlifovka/create_new_number_tapes.html'
     success_msg = 'Запись успешно обнавлена'
@@ -299,7 +287,6 @@ class Update_number_tapes_view(LoginRequiredMixin, CustomSuccessMessageMixin, Cu
         context['url'] = 'list-number-tapes'
         return context
 
-
         # context = super(BookListView, self).get_context_data(**kwargs)
         # # Добавляем новую переменную к контексту и инициализируем её некоторым значением
         # context['some_data'] = 'This is just some data'
@@ -310,12 +297,13 @@ class Delete_number_tapes_view(LoginRequiredMixin, CustomPostDeleteMixin, Custom
     success_msg = 'Запись удалена'
     extra_context = {'title': 'Форма для удаления записи'}
 
-
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['url'] = 'list-number-tapes'
         return context
 
+
+"""" Конец {'title_place': "Шлифовка",'name_form':'Учёт шлифовальных лент', 'url_name': 'number-tapes'} """
 
 """ Начало {'title_place': "Распиловка",'name_form':'Лабораторные образцы', 'url_name': 'list-lab-board'}"""
 
@@ -339,7 +327,6 @@ class Create_lab_board_view(LoginRequiredMixin, CustomSuccessMessageMixin,
     success_msg = 'Запись создана'
     extra_context = {'title':'Шлифовальные ленты'}
 
-
     def get_context_data(self, **kwargs):
         kwargs['list_articles'] = Lab_board_model.objects.all().order_by('-date_created')
         return super().get_context_data(**kwargs)
@@ -347,7 +334,6 @@ class Create_lab_board_view(LoginRequiredMixin, CustomSuccessMessageMixin,
 
 class Update_lab_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
                                   CustomLabBoardMixin, CustomGetFormUpdateMixin, UpdateView):
-
     form_class = Lab_board_form
     template_name = 'main/raspilovka/create_new_lab_board.html'
     success_msg = 'Запись успешно обнавлена'
@@ -376,9 +362,6 @@ class Delete_lab_board_view(LoginRequiredMixin, CustomPostDeleteMixin, CustomLab
 """" Конец {'title_place': "Распиловка",'name_form':'Лабораторные образцы', 'url_name': 'list-lab-board'} """
 
 
-
-
-"""" Конец {'title_place': "Шлифовка",'name_form':'Учёт шлифовальных лент', 'url_name': 'number-tapes'} """
 def about(request):
     return render(request, 'main/about.html')
 

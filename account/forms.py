@@ -57,23 +57,12 @@ class ProfileForm(forms.ModelForm):
                   'name_form7', 'name_form8', 'name_form9', 'name_form10', 'name_form11' ]
         # fields = ('__all__')
 
-    # widgets = {
-    #     "value1": TextInput(attrs={
-    #         'class': 'form-control',
-    #         'placeholder': 'Видимость формы 1',
-    #         'label': 'Видимость формы 11'
-    #     }),
-    #     "value2": TextInput(attrs={
-    #         'class': 'form-control',
-    #         'placeholder': 'Видимость формы 1',
-    #         'label': 'Видимость формы 1'
-    #     }),
-    # }
 
     def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             for field in self.fields:
                 self.fields[field].widget.attrs['class'] = 'form-control'
+
 
 class RegisterUserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)

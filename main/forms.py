@@ -69,7 +69,7 @@ class Thickness_pack_board_form(ModelForm):
 
 class Thickness_unpolished_pack_board_form(ModelForm):
     class Meta:
-        model = Thickness_pack_board_model
+        model = Thickness_unpolished_pack_board_model
         fields = ['value0', 'value1', 'value2', 'value3', 'value4', 'value5', 'value6', 'value7', 'value8',
                   'value9','value10','value11','value12','value13','value14','value15','value16','value17','value18',
                   'value19','value20','value21','value22']

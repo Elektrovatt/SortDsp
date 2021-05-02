@@ -27,8 +27,9 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
+
 class ProfileUserModel(models.Model):
-    """"Модель профиля пользователя"""""
+    """Модель профиля пользователя"""
     area = (
         ('All', 'All'),
         ('Шлифовка', 'Шлифовка'),

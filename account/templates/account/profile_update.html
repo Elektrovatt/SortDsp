@@ -5,27 +5,23 @@
 <div class="container">
 {% block content %}
      <p><a href="{% url 'home' %}">Вернуться назад</a></p>
-        <h3>Добро пожаловать    {{ user }}  </h3>
-
+        <h5>Настройки отображение форм для - {{ user }}</h5>
         <form method="post">
             <div class="form-control-test">
-                <p> {% if form.is_customer.value == True %}
-                    {% else %}
-                               ---
-                    {% endif %}</p>
+<!--                <p> {% if form.is_customer.value == True %}-->
+<!--                    {% else %}-->
+<!--                               -&#45;&#45;-->
+<!--                    {% endif %}</p>-->
 
                         {% csrf_token %}<br>
-                    <button class="btn btn-success" type="submit">Сохранить</button>
+                        <button class="btn btn-success" type="submit">Сохранить</button>
                          {% for f in form %}
-
                             <div class="form-group row">
-                                <label for="{{ f.id_for_label }}" class="col-sm-4 col-form-label">{{f.label}}:</label>
-                                    <div class="col-sm-3">
+                                <label for="{{ f.id_for_label }}" class="col-sm-5 col-form-label">{{f.label}}:</label>
+                                    <div class="col-sm-4">
                                       {{ f }}
                                     </div>
-
                             </div>
-
                             <div class="form-error"> {{ f.errors }}</div>
                         {% endfor%}
 

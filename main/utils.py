@@ -1,26 +1,27 @@
-from django.http import  HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from .models import *
 from django.contrib import messages
 
 
-menu = [{'title_place': "Шлифовка",'name_form':'Толщина Шлифованой плиты', 'url_name': 'board'},
-        {'title_place': "Шлифовка",'name_form':'Учёт шлифовальных материалов', 'url_name': 'list-number-tapes'},
-        {'title_place': "Шлифовка",'name_form':'Толщина пакета шлифованной плиты', 'url_name': 'pack-board'},
-        {'title_place': "Пресс",'name_form':'Форма контроля раб. состояния форсунок САП', 'url_name': 'about-me'},
-        {'title_place': "Пресс",'name_form':'Форма очистки лент преса', 'url_name': 'about-me'},
-        {'title_place': "Пресс",'name_form':'Толщина нешлифованой плиты', 'url_name': 'list-unpolished-board'},
-        {'title_place': "Пресс и Сушилка",'name_form':'Расход природного газа и древесной пыли', 'url_name': 'about-me'},
-        {'title_place': "Пресс",'name_form':'Производственные параметры для пресовщика', 'url_name': 'about-me'},
-        {'title_place': "Распиловка",'name_form':'Учёт замены чернильной системы', 'url_name': 'about-me'},
-        {'title_place': "Распиловка",'name_form':'Измерение покоробленности', 'url_name': 'about-me'},
-        {'title_place': "Распиловка",'name_form':'Толщина пакета нешлифованой плиты', 'url_name': 'list-unpolished-pack-board'},
-        {'title_place': "Распиловка", 'name_form': 'Лабораторные образцы',
-         'url_name': 'list-lab-board'},
-
+menu = [{'title_place': "Шлифовка", 'name_form': 'Толщина Шлифованой плиты', 'url_name': 'board'},
+        {'title_place': "Шлифовка", 'name_form': 'Учёт шлифовальных материалов', 'url_name': 'list-number-tapes'},
+        {'title_place': "Шлифовка", 'name_form': 'Толщина пакета шлифованной плиты', 'url_name': 'pack-board'},
+        {'title_place': "Пресс", 'name_form': 'Форма контроля раб. состояния форсунок САП', 'url_name': 'about-me'},
+        {'title_place': "Пресс", 'name_form': 'Форма очистки лент преса', 'url_name': 'about-me'},
+        {'title_place': "Пресс", 'name_form': 'Толщина нешлифованой плиты', 'url_name': 'list-unpolished-board'},
+        {'title_place': "Пресс и Сушилка", 'name_form': 'Расход природного газа и древесной пыли', 'url_name': 'about-me'},
+        {'title_place': "Пресс", 'name_form': 'Производственные параметры для пресовщика', 'url_name': 'about-me'},
+        {'title_place': "Распиловка", 'name_form': 'Учёт замены чернильной системы', 'url_name': 'about-me'},
+        {'title_place': "Распиловка", 'name_form': 'Измерение покоробленности', 'url_name': 'about-me'},
+        {'title_place': "Распиловка", 'name_form': 'Толщина пакета нешлифованой плиты', 'url_name': 'list-unpolished-pack-board'},
+        {'title_place': "Распиловка", 'name_form': 'Лабораторные образцы', 'url_name': 'list-lab-board'},
 
 ]
+
+
 class CustomSuccessMessageMixin:
-    """" для появления записи о обновления поля или добавлении нового  подсвечивается редактированая запись"""""
+    """ для появления записи о обновления поля или добавлении нового  подсвечивается редактированая запись"""
+
     @property
     def success_msg(self):
         return False
@@ -35,6 +36,7 @@ class CustomSuccessMessageMixin:
 
 class CustomFormValidMixin:
 
+
     def form_valid(self, form):
         """"Переопределение формы валидации для добавления автора в базу"""""
         self.object = form.save(commit=False)
@@ -44,11 +46,11 @@ class CustomFormValidMixin:
 
 
 class CustomGetFormUpdateMixin:
+    success_msg = 'Запись успешно обнавлена'
 
     def get_user_context(self, **kwargs):
         context = kwargs
         return context
-
 
     def get_form_kwargs(self):
         """"Переопределяем метод для редактирования Только своей записи"""""
@@ -59,12 +61,13 @@ class CustomGetFormUpdateMixin:
 
 
 class CustomPostDeleteMixin:
+    success_msg = 'Запись удалена'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['update'] = True
-        context['menu'] = menu
-        return context
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['update'] = True
+    #     context['menu'] = menu
+    #     return context
 
     def post(self, request, *args, **kwargs):
         messages.success(self.request, self.success_msg)
