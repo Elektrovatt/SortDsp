@@ -33,7 +33,7 @@
         </thead>
       <tbody>
              <tr>
-                {% for i in list_value %}
+                {% for i in filter %}
                 <tr {% if i.id|slugify == request.GET.id %} class="table-active" {% endif %}>
                     <td class="align-middle"> {{ i.author.last_name }}</td>
                     <td class="align-middle">{{ i.date_created|date:'d.m.Y H:i' }}</td>

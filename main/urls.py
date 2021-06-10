@@ -42,8 +42,13 @@ urlpatterns = [
     path('unpolished_board_pack_delete/<int:pk>', views.Delete_thickness_unpolished_pack_board_view.as_view(),
          name='delete-unpolished-pack-board'),
 
-     path('list_number_tapes', views.List_number_tapes_view.as_view(),
+    path('list_number_tapes', views.List_number_tapes_view.as_view(),
          name='list-number-tapes'),
+
+
+
+    path('list_number_tapes/filter/<int:pk>', views.news_filter, name='news_filter'),
+
     path('number_tapes_create', views.Create_number_tapes_view.as_view(),
          name='create-number-tapes'),
     path('number_tapes_update/<int:pk>', views.Update_number_tapes_view.as_view(),

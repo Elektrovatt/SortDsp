@@ -127,6 +127,7 @@ class Thickness_unpolished_board_form(ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
 
+
 class Number_tapes_form(ModelForm):
     Agg1 = (
         ('', ''),
@@ -165,12 +166,12 @@ class Number_tapes_form(ModelForm):
     number_2_3_choices = forms.ChoiceField(choices=Agg1, label='Выберите зернистость', required=False)
     number_2_3_choices2 = forms.ChoiceField(choices=Agg3, label='Выберите тип ленты', required=False)
     liner_2_3_choices = forms.ChoiceField(choices=Agg2, label='Выберите вкладыш', required=False)
-    value4 = forms.CharField(max_length=25, label='Введите пробег ленты 1.1', empty_value="", required=False)
+    value4 = forms.CharField(max_length=25, label='Введите пробег ленты 2.3', empty_value="", required=False)
 
     number_2_4_choices = forms.ChoiceField(choices=Agg1, label='Выберите зернистость', required=False)
     number_2_4_choices2 = forms.ChoiceField(choices=Agg3, label='Выберите тип ленты', required=False)
     liner_2_4_choices = forms.ChoiceField(choices=Agg2, label='Выберите вкладыш', required=False)
-    value5 = forms.CharField(max_length=25, label='Введите пробег ленты 1.1', empty_value="", required=False)
+    value5 = forms.CharField(max_length=25, label='Введите пробег ленты 2.4', empty_value="", required=False)
 
     class Meta:
         model = Number_tapes_model

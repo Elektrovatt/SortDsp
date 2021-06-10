@@ -49,3 +49,7 @@ aside img {
 .pack-width{
     width:105px;
 }
+
+.font-size-link-card{
+    font-size: 10px !important;
+}

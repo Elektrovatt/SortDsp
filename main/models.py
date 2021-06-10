@@ -1,3 +1,4 @@
+import django_filters
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -208,6 +209,16 @@ class Number_tapes_model(models.Model):
             verbose_name = 'поля'
             verbose_name_plural = 'Шлифвока - Учёт шлифовальных лент'
             ordering = ('-date_created',)
+
+
+class ProductFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(lookup_expr='iexact')
+
+    class Meta:
+        model = Number_tapes_model
+        fields = ['date_created']
+
+
 
 class Lab_board_model(models.Model):
     """добавить лабораторную плиту"""
