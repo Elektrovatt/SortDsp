@@ -159,9 +159,9 @@ class BaseNumberTapes:
         context['menu'] = menu
         return context
 
-    # def get_queryset(self):
-    #     now = datetime.today() - timedelta(minutes=60 * 24 * 7)
-    #     return Number_tapes_model.objects.filter(date_created__gte=now)
+    def get_queryset(self):
+        now = datetime.today() - timedelta(minutes=60 * 24 * 7)
+        return Number_tapes_model.objects.filter(date_created__gte=now)
 
 def news_filter(request, pk):
     filter = Number_tapes_model.objects.all()
