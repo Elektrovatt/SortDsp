@@ -65,5 +65,22 @@ urlpatterns = [
     path('lab_board_delete/<int:pk>', views.Delete_lab_board_view.as_view(),
          name='delete-lab-board'),
 
+    path('list_sizes_unpolished_board', views.List_sizes_unpolished_board_view.as_view(),
+         name='list-sizes-unpolished-board'),
+    path('sizes_unpolished_board_create', views.Create_sizes_unpolished_board_view.as_view(),
+         name='create-sizes-unpolished-board'),
+    path('sizes_unpolished_board_update/<int:pk>', views.Update_sizes_unpolished_board_view.as_view(),
+         name='update-sizes-unpolished-board'),
+    path('sizes_unpolished_board_delete/<int:pk>', views.Delete_sizes_unpolished_board_view.as_view(),
+         name='delete-sizes-unpolished-board'),
+
+    path('list_cleaning_press_tape', views.List_cleaning_press_tape_view.as_view(),
+         name='list-cleaning-press-tape'),
+    path('cleaning_press_tape_create', views.Create_cleaning_press_tape_view.as_view(),
+         name='create-cleaning-press-tape'),
+    path('cleaning_press_tape_update/<int:pk>', views.Update_cleaning_press_tape_view.as_view(),
+         name='update-cleaning-press-tape'),
+    path('cleaning_press_tape_delete/<int:pk>', views.Delete_cleaning_press_tape_view.as_view(),
+         name='delete-cleaning-press-tape'),
 
 ]

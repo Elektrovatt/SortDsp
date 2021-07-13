@@ -82,28 +82,30 @@ class Thickness_unpolished_pack_board_model(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
     value0 = models.CharField(max_length=2, null=True, verbose_name='Толщина плиты')
-    value1 = models.CharField(max_length=5, null=True, verbose_name='Значение 1')
-    value2 = models.CharField(max_length=5, null=True, verbose_name='Значение 2')
-    value3 = models.CharField(max_length=5, null=True, verbose_name='Значение 3')
-    value4 = models.CharField(max_length=5, null=True, verbose_name='Значение 4')
-    value5 = models.CharField(max_length=5, null=True, verbose_name='Значение 5')
-    value6 = models.CharField(max_length=5, null=True, verbose_name='Значение 6')
-    value7 = models.CharField(max_length=5, null=True, verbose_name='Значение 7')
-    value8 = models.CharField(max_length=5, null=True, verbose_name='Значение 8')
-    value9 = models.CharField(max_length=5, null=True, verbose_name='Значение 9')
-    value10 = models.CharField(max_length=5, null=True, verbose_name='Значение 10')
-    value11 = models.CharField(max_length=5, null=True, verbose_name='Значение 11')
-    value12 = models.CharField(max_length=5, null=True, verbose_name='Значение 12')
-    value13 = models.CharField(max_length=5, null=True, verbose_name='Значение 13')
-    value14 = models.CharField(max_length=5, null=True, verbose_name='Значение 14')
-    value15 = models.CharField(max_length=5, null=True, verbose_name='Значение 15')
-    value16 = models.CharField(max_length=5, null=True, verbose_name='Значение 16')
-    value17 = models.CharField(max_length=5, null=True, verbose_name='Значение 17')
-    value18 = models.CharField(max_length=5, null=True, verbose_name='Значение 18')
-    value19 = models.CharField(max_length=5, null=True, verbose_name='Значение 19')
-    value20 = models.CharField(max_length=5, null=True, verbose_name='Значение 20')
-    value21 = models.CharField(max_length=5, null=True, verbose_name='Значение 21')
-    value22 = models.CharField(max_length=5, null=True, verbose_name='Значение 22')
+    value1 = models.CharField(max_length=5, null=True, verbose_name='Зад толщ. после пресса, мм')
+    value2 = models.CharField(max_length=2, null=True, verbose_name='Плит в пакете, шт')
+    value3 = models.CharField(max_length=5, null=True, verbose_name='Значение 1')
+    value4 = models.CharField(max_length=5, null=True, verbose_name='Значение 2')
+    value5 = models.CharField(max_length=5, null=True, verbose_name='Значение 3')
+    value6 = models.CharField(max_length=5, null=True, verbose_name='Значение 4')
+    value7 = models.CharField(max_length=5, null=True, verbose_name='Значение 5')
+    value8 = models.CharField(max_length=5, null=True, verbose_name='Значение 6')
+    value9 = models.CharField(max_length=5, null=True, verbose_name='Значение 7')
+    value10 = models.CharField(max_length=5, null=True, verbose_name='Значение 8')
+    value11 = models.CharField(max_length=5, null=True, verbose_name='Значение 9')
+    value12 = models.CharField(max_length=5, null=True, verbose_name='Значение 10')
+    value13 = models.CharField(max_length=5, null=True, verbose_name='Значение 11')
+    value14 = models.CharField(max_length=5, null=True, verbose_name='Значение 12')
+    value15 = models.CharField(max_length=5, null=True, verbose_name='Значение 13')
+    value16 = models.CharField(max_length=5, null=True, verbose_name='Значение 14')
+    value17 = models.CharField(max_length=5, null=True, verbose_name='Значение 15')
+    value18 = models.CharField(max_length=5, null=True, verbose_name='Значение 16')
+    value19 = models.CharField(max_length=5, null=True, verbose_name='Значение 17')
+    value20 = models.CharField(max_length=5, null=True, verbose_name='Значение 18')
+    value21 = models.CharField(max_length=5, null=True, verbose_name='Значение 19')
+    value22 = models.CharField(max_length=5, null=True, verbose_name='Значение 20')
+    value23 = models.CharField(max_length=5, null=True, verbose_name='Значение 21')
+    value24 = models.CharField(max_length=5, null=True, verbose_name='Значение 22')
 
     def __str__(self):
         return ('Смена № %s, плита: %s, дата: %s.' %(self.author, self.value0, self.date_created))
@@ -113,7 +115,7 @@ class Thickness_unpolished_pack_board_model(models.Model):
 
     class Meta:
             verbose_name = 'поля'
-            verbose_name_plural = 'Распиловка - Толщина не шлифованой пачки'
+            verbose_name_plural = 'Распиловка - Толщина нешлифованой пачки'
             ordering = ('-date_created',)
 
 
@@ -139,6 +141,63 @@ class Thickness_unpolished_board_model(models.Model):
             verbose_name = 'поля'
             verbose_name_plural = 'Пресс - Толщина нешлифованой плиты'
             ordering = ('-date_created',)
+
+
+class Cleaning_press_tape_model(models.Model):
+    #Очистка ленты пресса
+
+    value_clean = (
+        ('', ''),
+        ('Грязная', 'Грязная'),
+        ('Чистая', 'Чистая'),
+        ('Очистка', 'Очистка'),
+    )
+
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
+    value0 = models.CharField(max_length=20, choices=value_clean, verbose_name='Левая сторона ленты')
+    value1 = models.CharField(max_length=20, choices=value_clean, verbose_name='Центр ленты')
+    value2 = models.CharField(max_length=20, choices=value_clean, verbose_name='Правая сторона ленты')
+    value3 = models.CharField(max_length=20, choices=value_clean, verbose_name='Левая сторона ленты')
+    value4 = models.CharField(max_length=20, choices=value_clean, verbose_name='Центр ленты')
+    value5 = models.CharField(max_length=20, choices=value_clean, verbose_name='Правая сторона ленты')
+
+
+    def __str__(self):
+        return ('Смена № %s, дата: %s.' %(self.author, self.date_created))
+
+    def get_absolute_url(self):
+         return f'/cleaning-press-tape/{self.pk}'
+
+    class Meta:
+            verbose_name = 'поля'
+            verbose_name_plural = 'Пресс - Очистка ленты пресса'
+            ordering = ('-date_created',)
+
+
+
+class Sizes_unpolished_board_model(models.Model):
+    #добавить размеры нешлифованной плиты
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
+    value0 = models.CharField(max_length=2, null=True, verbose_name='Толщина плиты')
+    value1 = models.CharField(max_length=4, null=True, verbose_name='Ширина 2070(+/- 5), мм')
+    value2 = models.CharField(max_length=4, null=True, verbose_name='Длинна правая сторона в мм')
+    value3 = models.CharField(max_length=4, null=True, verbose_name='Длинна левая сторона в мм ')
+    value4 = models.CharField(max_length=1, null=True, verbose_name='Разница диагоналей в мм')
+
+
+    def __str__(self):
+        return ('Смена № %s, плита: %s, дата: %s.' %(self.author, self.value0, self.date_created))
+
+    def get_absolute_url(self):
+         return f'/sizes-unpolished-board/{self.pk}'
+
+    class Meta:
+            verbose_name = 'поля'
+            verbose_name_plural = 'Распиловка - Размеры нешлифованой плиты'
+            ordering = ('-date_created',)
+
 
 class Number_tapes_model(models.Model):
     "Учёт шлифовальных материалов"

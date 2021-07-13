@@ -357,7 +357,7 @@ class Create_lab_board_view(LoginRequiredMixin, CustomSuccessMessageMixin,Custom
     form_class = Lab_board_form
     template_name = 'main/raspilovka/create_new_lab_board.html'
     success_msg = 'Запись создана'
-    extra_context = {'title':'Шлифовальные ленты'}
+    extra_context = {'title':'Лабораторные образцы'}
 
 
 class Update_lab_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
@@ -377,6 +377,114 @@ class Delete_lab_board_view(LoginRequiredMixin, CustomPostDeleteMixin, BaseLabBo
 """
 Конец {'title_place': "Распиловка",'name_form':'Лабораторные образцы', 'url_name': 'list-lab-board'}
 """
+
+
+
+"""
+Начало {'title_place': "Распиловка",'name_form':'Размеры нешлифованной ДСП', 'url_name': 'list-sizes-unpolished-board'}
+"""
+
+
+class BaseSizesUnpolishedBoard:
+    model = Sizes_unpolished_board_model
+    success_url = reverse_lazy('list-sizes-unpolished-board')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        kwargs['list_articles'] = Sizes_unpolished_board_model.objects.all().order_by('-date_created')
+        kwargs['update'] = True
+        context = super().get_context_data(**kwargs)
+        context['url'] = 'list-sizes-unpolished-board'
+        context['menu'] = menu
+        return context
+
+
+class List_sizes_unpolished_board_view(BaseSizesUnpolishedBoard, ListView):
+    template_name = 'main/raspilovka/list_sizes_unpolished_board.html'
+    context_object_name = 'list_value'
+    extra_context = {'title': 'Размеры нешлифованной ДСП'}
+
+
+class Create_sizes_unpolished_board_view(LoginRequiredMixin, CustomSuccessMessageMixin,CustomFormValidMixin,
+                            BaseSizesUnpolishedBoard, CreateView):
+    form_class = Sizes_unpolished_board_form
+    template_name = 'main/raspilovka/create_new_sizes_unpolished_board.html'
+    success_msg = 'Запись создана'
+    extra_context = {'title':'Размеры нешлифованной ДСП'}
+
+
+class Update_sizes_unpolished_board_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
+                                  BaseSizesUnpolishedBoard, CustomGetFormUpdateMixin, UpdateView):
+    form_class = Sizes_unpolished_board_form
+    template_name = 'main/raspilovka/create_new_sizes_unpolished_board.html'
+    success_msg = 'Запись успешно обнавлена'
+    extra_context = {'title': 'Изменение значений размеров нешлифованной ДСП'}
+
+
+class Delete_sizes_unpolished_board_view(LoginRequiredMixin, CustomPostDeleteMixin,
+                                         BaseSizesUnpolishedBoard, DeleteView):
+    template_name = 'main/delete.html'
+    success_msg = 'Запись удалена'
+    extra_context = {'title': 'Форма для удаления записи'}
+
+
+"""
+Конец {'title_place': "Распиловка",'name_form':'Размеры нешлифованной ДСП', 'url_name': 'list-sizes-unpolished-board'}
+"""
+
+
+
+
+"""
+Начало {'title_place': "Пресс", 'name_form': 'Форма очистки лент преса', 'url_name': 'cleaning-press-tape'},
+"""
+
+
+class BaseCleaningPressTape:
+    model = Cleaning_press_tape_model
+    success_url = reverse_lazy('list-cleaning-press-tape')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        kwargs['list_articles'] = Cleaning_press_tape_model.objects.all().order_by('-date_created')
+        kwargs['update'] = True
+        context = super().get_context_data(**kwargs)
+        context['url'] = 'list-cleaning-press-tape'
+        context['menu'] = menu
+        return context
+
+
+class List_cleaning_press_tape_view(BaseCleaningPressTape, ListView):
+    template_name = 'main/press/list_cleaning_press_tape.html'
+    context_object_name = 'list_value'
+    extra_context = {'title': 'Форма очистки ленты пресса'}
+
+
+class Create_cleaning_press_tape_view(LoginRequiredMixin, CustomSuccessMessageMixin,CustomFormValidMixin,
+                            BaseCleaningPressTape, CreateView):
+    form_class = Сleaning_press_tape_form
+    template_name = 'main/press/create_cleaning_press_tape.html'
+    success_msg = 'Запись создана'
+    extra_context = {'title':'Новая форма очистки ленты пресса'}
+
+
+class Update_cleaning_press_tape_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
+                                  BaseCleaningPressTape, CustomGetFormUpdateMixin, UpdateView):
+    form_class = Сleaning_press_tape_form
+    template_name = 'main/press/create_cleaning_press_tape.html'
+    success_msg = 'Запись успешно обнавлена'
+    extra_context = {'title': 'Изменение значений  формы очистки ленты пресса'}
+
+
+class Delete_cleaning_press_tape_view(LoginRequiredMixin, CustomPostDeleteMixin,
+                                         BaseCleaningPressTape, DeleteView):
+    template_name = 'main/delete.html'
+    success_msg = 'Запись удалена'
+    extra_context = {'title': 'Форма для удаления записи'}
+
+
+"""
+Конец {'title_place': "Пресс", 'name_form': 'Форма очистки лент преса', 'url_name': 'cleaning-press-tape'},
+"""
+
 
 
 def about(request):

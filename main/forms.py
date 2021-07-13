@@ -27,6 +27,61 @@ class Thickness_board_form(ModelForm):
                 self.fields[field].widget.attrs['class'] = 'form-control'
 
 
+class Sizes_unpolished_board_form(ModelForm):
+    class Meta:
+        model = Sizes_unpolished_board_model
+        fields = ['value0', 'value1', 'value2', 'value3', 'value4']
+        widgets = {
+            "is_author": TextInput(attrs={'class': 'form-control', 'placeholder': 'Автор'}),
+            "value0": TextInput(attrs={'class': 'form-control', 'placeholder': 'Толщина плиты'}),
+            "value1": TextInput(attrs={'class': 'form-control', 'placeholder': 'Ширина 2070(+/- 5), мм'}),
+            "value2": TextInput(attrs={'class': 'form-control', 'placeholder': 'Длинна правая сторона, мм'}),
+            "value3": TextInput(attrs={'class': 'form-control', 'placeholder': 'Длинна левая сторона, мм'}),
+            "value4": TextInput(attrs={'class': 'form-control', 'placeholder': 'Разница диагоналей, мм'})
+
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'
+
+
+class Сleaning_press_tape_form(ModelForm):
+    value_clean = (
+        ('', ''),
+        ('Грязная', 'Грязная'),
+        ('Чистая', 'Чистая'),
+        ('Очистка', 'Очистка'),
+    )
+    value0 = forms.ChoiceField(choices=value_clean)
+    value1 = forms.ChoiceField(choices=value_clean)
+    value2 = forms.ChoiceField(choices=value_clean)
+    value3 = forms.ChoiceField(choices=value_clean)
+    value4 = forms.ChoiceField(choices=value_clean)
+    value5 = forms.ChoiceField(choices=value_clean)
+
+    class Meta:
+        model = Cleaning_press_tape_model
+        fields = [
+            'value0', 'value1', 'value2',
+            'value3', 'value4', 'value5']
+        widgets = {
+
+            "value0": TextInput(attrs={'class': 'form-control', 'placeholder': ' 1.1'}),
+            "value1": TextInput(attrs={'class': 'form-control', 'placeholder': ' 1.2'}),
+            "value2": TextInput(attrs={'class': 'form-control', 'placeholder': ' 2.1'}),
+            "value3": TextInput(attrs={'class': 'form-control', 'placeholder': ' 2.2'}),
+            "value4": TextInput(attrs={'class': 'form-control', 'placeholder': ' 2.3'}),
+            "value5": TextInput(attrs={'class': 'form-control', 'placeholder': ' 2.4'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'
+
+
 class Thickness_pack_board_form(ModelForm):
     class Meta:
         model = Thickness_pack_board_model
@@ -67,37 +122,40 @@ class Thickness_pack_board_form(ModelForm):
             self.fields[field].widget.attrs['class'] = 'form-control'
 
 
+
 class Thickness_unpolished_pack_board_form(ModelForm):
     class Meta:
         model = Thickness_unpolished_pack_board_model
         fields = ['value0', 'value1', 'value2', 'value3', 'value4', 'value5', 'value6', 'value7', 'value8',
                   'value9','value10','value11','value12','value13','value14','value15','value16','value17','value18',
-                  'value19','value20','value21','value22']
+                  'value19','value20','value21','value22','value23','value24']
         widgets = {
             "is_customer": TextInput(attrs={'class': 'form-control', 'placeholder': 'Автор'}),
             "value0": TextInput(attrs={'class': 'form-control', 'placeholder': 'Толщина плиты, мм'}),
-            "value1": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 1'}),
-            "value2": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 2'}),
-            "value3": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 3'}),
-            "value4": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 4'}),
-            "value5": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 5'}),
-            "value6": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 6'}),
-            "value7": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 7'}),
-            "value8": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 8'}),
-            "value9": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 9'}),
-            "value10": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 10'}),
-            "value11": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 11'}),
-            "value12": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 12'}),
-            "value13": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 13'}),
-            "value14": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 14'}),
-            "value15": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 15'}),
-            "value16": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 16'}),
-            "value17": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 17'}),
-            "value18": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 18'}),
-            "value19": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 19'}),
-            "value20": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 20'}),
-            "value21": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 21'}),
-            "value22": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 22'})
+            "value1": TextInput(attrs={'class': 'form-control', 'placeholder': 'Зад толщ. после пресса, мм'}),
+            "value2": TextInput(attrs={'class': 'form-control', 'placeholder': 'Плит в пакете, шт'}),
+            "value3": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 1'}),
+            "value4": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 2'}),
+            "value5": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 3'}),
+            "value6": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 4'}),
+            "value7": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 5'}),
+            "value8": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 6'}),
+            "value9": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 7'}),
+            "value10": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 8'}),
+            "value11": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 9'}),
+            "value12": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 10'}),
+            "value13": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 11'}),
+            "value14": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 12'}),
+            "value15": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 13'}),
+            "value16": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 14'}),
+            "value17": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 15'}),
+            "value18": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 16'}),
+            "value19": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 17'}),
+            "value20": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 18'}),
+            "value21": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 19'}),
+            "value22": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 20'}),
+            "value23": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 21'}),
+            "value24": TextInput(attrs={'class': 'form-control', 'placeholder': 'Значение 22'})
 
         }
 

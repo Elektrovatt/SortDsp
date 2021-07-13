@@ -46,3 +46,19 @@ class Lab_board_model_Admin(admin.ModelAdmin):
     search_fields = ('author', )
 
 admin.site.register(Lab_board_model, Lab_board_model_Admin)
+
+
+class Sizes_unpolished_board_model_Admin(admin.ModelAdmin):
+    list_display = ('id', 'author', 'date_created', 'value0', 'value1')
+    list_display_links = ('id', 'author')
+    search_fields = ('author', )
+
+admin.site.register(Sizes_unpolished_board_model, Sizes_unpolished_board_model_Admin)
+
+
+class Cleaning_press_tape_model_Admin(admin.ModelAdmin):
+    list_display = ('id', 'author', 'date_created')
+    list_display_links = ('id', 'author')
+    search_fields = ('author', )
+
+admin.site.register(Cleaning_press_tape_model, Cleaning_press_tape_model_Admin)
