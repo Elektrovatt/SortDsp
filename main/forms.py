@@ -304,3 +304,25 @@ class Lab_board_form(ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
+
+
+class Press_sap_form(forms.ModelForm):
+    """Форма пресс состояние форсунок САП"""
+
+    class Meta:
+        model = Press_sap_model
+        fields = ['name_form1',
+                  'name_form2', 'name_form3', 'name_form4', 'name_form5', 'name_form6',
+                  'name_form7', 'name_form8', 'name_form9', 'name_form10', 'name_form11',
+                  'name_form12','name_form13','name_form14','name_form15','name_form16',
+                  'name_form17','name_form18','name_form19','name_form20','name_form21',
+                  'name_form22','name_form23','name_form24','name_form25','name_form26',
+                  'name_form27','name_form28','name_form29','name_form30','name_form31',
+                  'name_form32','name_form33','name_form34','name_form35']
+        # fields = ('__all__')
+
+
+    def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            for field in self.fields:
+                self.fields[field].widget.attrs['class'] = 'form-control'

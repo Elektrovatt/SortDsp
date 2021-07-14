@@ -311,3 +311,58 @@ class Lab_board_model(models.Model):
             verbose_name = 'поля'
             verbose_name_plural = 'Распиловка - Лабораторные образцы'
             ordering = ('-date_created',)
+
+
+class Press_sap_model(models.Model):
+    """Модель состояния форсунок САП"""
+
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Владелец записи", blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
+    name_form1 = models.BooleanField("121", default=False)
+    name_form2 = models.BooleanField("123", default=False)
+    name_form3 = models.BooleanField("125", default=False)
+    name_form4 = models.BooleanField("127", default=False)
+    name_form5 = models.BooleanField("129", default=False)
+    name_form6 = models.BooleanField("131", default=False)
+    name_form7 = models.BooleanField("133", default=False)
+    name_form8 = models.BooleanField("135", default=False)
+    name_form9 = models.BooleanField("160", default=False)
+    name_form10 = models.BooleanField("161", default=False)
+    name_form11 = models.BooleanField("162", default=False)
+    name_form12 = models.BooleanField("163", default=False)
+    name_form13 = models.BooleanField("164", default=False)
+    name_form14 = models.BooleanField("171", default=False)
+    name_form15 = models.BooleanField("173", default=False)
+    name_form16 = models.BooleanField("175", default=False)
+    name_form17 = models.BooleanField("177", default=False)
+    name_form18 = models.BooleanField("179", default=False)
+    name_form19 = models.BooleanField("181", default=False)
+    name_form20 = models.BooleanField("183", default=False)
+    name_form21 = models.BooleanField("122", default=False)
+    name_form22 = models.BooleanField("124", default=False)
+    name_form23 = models.BooleanField("126", default=False)
+    name_form24 = models.BooleanField("128", default=False)
+    name_form25 = models.BooleanField("130", default=False)
+    name_form26 = models.BooleanField("132", default=False)
+    name_form27 = models.BooleanField("134", default=False)
+    name_form28 = models.BooleanField("136", default=False)
+    name_form29 = models.BooleanField("172", default=False)
+    name_form30 = models.BooleanField("174", default=False)
+    name_form31 = models.BooleanField("176", default=False)
+    name_form32 = models.BooleanField("178", default=False)
+    name_form33 = models.BooleanField("180", default=False)
+    name_form34 = models.BooleanField("182", default=False)
+    name_form35 = models.BooleanField("184", default=False)
+
+
+    def __str__(self):
+        return ('автор  %s ' % (self.author))
+
+    def get_absolute_url(self):
+        return f'/list-press-sap/{self.pk}'
+
+
+    class Meta:
+        verbose_name = 'поля'
+        verbose_name_plural = 'Пресс - Состояние форсунок САП'
+        ordering = ('-date_created',)

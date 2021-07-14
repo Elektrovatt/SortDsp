@@ -62,3 +62,12 @@ class Cleaning_press_tape_model_Admin(admin.ModelAdmin):
     search_fields = ('author', )
 
 admin.site.register(Cleaning_press_tape_model, Cleaning_press_tape_model_Admin)
+
+
+
+class Press_sap_model_Admin(admin.ModelAdmin):
+    list_display = ('id', 'author', 'date_created')
+    list_display_links = ('id', 'author')
+    search_fields = ('author', )
+
+admin.site.register(Press_sap_model,Press_sap_model_Admin)

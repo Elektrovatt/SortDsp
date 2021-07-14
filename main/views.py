@@ -487,6 +487,60 @@ class Delete_cleaning_press_tape_view(LoginRequiredMixin, CustomPostDeleteMixin,
 
 
 
+
+"""
+Начало {'title_place': "Пресс", 'name_form': 'Форма очистки лент преса', 'url_name': 'press-sap'},
+"""
+
+
+class BasePressSap:
+    model = Press_sap_model
+    success_url = reverse_lazy('list-press-sap')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        kwargs['list_articles'] = Press_sap_model.objects.all().order_by('-date_created')
+        kwargs['update'] = True
+        context = super().get_context_data(**kwargs)
+        context['url'] = 'list-press-sap'
+        context['menu'] = menu
+        return context
+
+
+class List_press_sap_view(BasePressSap, ListView):
+    template_name = 'main/press/list_press_sap.html'
+    context_object_name = 'list_value'
+    extra_context = {'title': 'Форма контроля рабочего состояния форсунок САП'}
+
+
+class Create_press_sap_view(LoginRequiredMixin, CustomSuccessMessageMixin,CustomFormValidMixin,
+                            BasePressSap, CreateView):
+    form_class = Press_sap_form
+    template_name = 'main/press/create_press_sap.html'
+    success_msg = 'Запись создана'
+    extra_context = {'title':'Новая Форма контроля рабочего состояния форсунок САП'}
+
+
+class Update_press_sap_view(LoginRequiredMixin, CustomSuccessMessageMixin, CustomFormValidMixin,
+                                  BasePressSap, CustomGetFormUpdateMixin, UpdateView):
+    form_class = Press_sap_form
+    template_name = 'main/press/create_press_sap.html'
+    success_msg = 'Запись успешно обнавлена'
+    extra_context = {'title': 'Изменение значений  формы оконтроля рабочего состояния форсунок САП'}
+
+
+class Delete_press_sap_view(LoginRequiredMixin, CustomPostDeleteMixin,
+                                         BasePressSap, DeleteView):
+    template_name = 'main/delete.html'
+    success_msg = 'Запись удалена'
+    extra_context = {'title': 'Форма для удаления записи'}
+
+
+"""
+Конец {'title_place': "Пресс", 'name_form': 'Форма очистки лент преса', 'url_name': 'press-sap'},
+"""
+
+
+
 def about(request):
     return render(request, 'main/about.html')
 

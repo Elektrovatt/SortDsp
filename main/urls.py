@@ -83,4 +83,12 @@ urlpatterns = [
     path('cleaning_press_tape_delete/<int:pk>', views.Delete_cleaning_press_tape_view.as_view(),
          name='delete-cleaning-press-tape'),
 
+    path('list_press_sap', views.List_press_sap_view.as_view(),
+         name='list-press-sap'),
+    path('press_sap_create', views.Create_press_sap_view.as_view(),
+         name='create-press-sap'),
+    path('press_sap_update/<int:pk>', views.Update_press_sap_view.as_view(),
+         name='update-press-sap'),
+    path('press_sap_delete/<int:pk>', views.Delete_press_sap_view.as_view(),
+         name='delete-press-sap'),
 ]
