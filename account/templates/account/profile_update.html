@@ -14,7 +14,6 @@
 <!--                    {% endif %}</p>-->
 
                         {% csrf_token %}<br>
-                        <button class="btn btn-success" type="submit">Сохранить</button>
                          {% for f in form %}
                             <div class="form-group row">
                                 <label for="{{ f.id_for_label }}" class="col-sm-5 col-form-label">{{f.label}}:</label>

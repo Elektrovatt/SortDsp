@@ -54,19 +54,7 @@ class ProfileUserModel(models.Model):
     value2 = models.CharField(choices=number_shift, max_length=50, null=True, verbose_name='смена №')
     value3 = models.CharField(choices=area, max_length=500, null=True, verbose_name='Участок',
                               help_text='дробилка, стружка. заточка, сушилка, клееварка, формовка, пресс, распиловка, шлифовка')
-    name_form1 = models.BooleanField("Толщина Шлифованой плиты", default=False, help_text='Участок - Шлифовка')
-    name_form2 = models.BooleanField("Учёт шлифовальных материалов", default=False, help_text='Участок - Шлифовка')
-    name_form3 = models.BooleanField("Толщина пакета шлифованной плиты", default=False, help_text='Участок - Шлифовка')
-    name_form4 = models.BooleanField("Толщина пакета нешлифованой плиты", default=False, help_text='Участок - Распиловка')
-    name_form5 = models.BooleanField("Измерение покоробленности", default=False, help_text='Участок - Распиловка')
-    name_form6 = models.BooleanField("Учёт замены чернильной системы", default=False, help_text='Участок - Распиловка')
-    name_form7 = models.BooleanField("Производственные параметры для пресовщика", default=False, help_text='Участок - Пресс')
-    name_form8 = models.BooleanField("Расход природного газа и древесной пыли", default=False, help_text='Участок - Пресс')
-    name_form9 = models.BooleanField("Толщина нешлифованой плиты", default=False, help_text='Участок - Пресс')
-    name_form10 = models.BooleanField("Форма очистки лент преса", default=False, help_text='Участок - Пресс')
-    name_form11 = models.BooleanField("Форма контроля рабочего состояния форсунок САП", default=False, help_text='Участок - Пресс')
-    """"Расход газа Ness и воды на SAP - пресс, расход Газа и древесной пылина сушилке.
-    Общую создаёт нач смены? или одна запись с правами редактирования пресса и сушилки """""
+
 
     def __str__(self):
         return ('автор  %s, смена : %s. участок : %s.' % (self.user, self.value2, self.value3))
