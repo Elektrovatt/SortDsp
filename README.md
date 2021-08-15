@@ -1,7 +1,7 @@
 <h2 align="center">Forms for DSP</h2>
 
 ### Описание проекта:
-Формы для заполения
+Формы для заполения операторами
 
 
 ### Инструменты разработки
@@ -42,6 +42,6 @@
     python manage.py runserver
 
 ## License
-небольшой дамп с данными 
+небольшой дамп с данными    
 python manage.py loaddata db.json
 
