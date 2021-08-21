@@ -42,7 +42,7 @@ class CustomBaseThicknessBoard:
     success_url = reverse_lazy('board')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        kwargs['list_articles'] = Thickness_board_model.objects.all().order_by('-date_created')
+        kwargs['list_records'] = Thickness_board_model.objects.all().order_by('-date_created')
         kwargs['update'] = True
         context = super().get_context_data(**kwargs)
         context['url'] = 'board'
@@ -94,7 +94,7 @@ class CustomBaseThicknessPackBoad:
     success_url = reverse_lazy('pack-board')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        kwargs['list_articles'] = Thickness_pack_board_model.objects.all().order_by('-date_created')
+        kwargs['list_records'] = Thickness_pack_board_model.objects.all().order_by('-date_created')
         kwargs['update'] = True
         context = super().get_context_data(**kwargs)
         context['url'] = 'pack-board'
@@ -227,7 +227,7 @@ class CustomBaseThicknessUnpolishedBoad:
     success_url = reverse_lazy('list-unpolished-board')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        kwargs['list_articles'] = Thickness_unpolished_board_model.objects.all().order_by('-date_created')
+        kwargs['list_records'] = Thickness_unpolished_board_model.objects.all().order_by('-date_created')
         kwargs['update'] = True
         context = super().get_context_data(**kwargs)
         context['url'] = 'list-unpolished-board'
@@ -281,7 +281,7 @@ class BaseThicknessUnpolishedPackBoard:
     success_url = reverse_lazy('list-unpolished-pack-board')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        kwargs['list_articles'] = Thickness_unpolished_pack_board_model.objects.all().order_by('-date_created')
+        kwargs['list_records'] = Thickness_unpolished_pack_board_model.objects.all().order_by('-date_created')
         kwargs['update'] = True
         context = super().get_context_data(**kwargs)
         context['url'] = 'list-unpolished-pack-board'
@@ -338,7 +338,7 @@ class BaseLabBoard:
     success_url = reverse_lazy('list-lab-board')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        kwargs['list_articles'] = Lab_board_model.objects.all().order_by('-date_created')
+        kwargs['list_records'] = Lab_board_model.objects.all().order_by('-date_created')
         kwargs['update'] = True
         context = super().get_context_data(**kwargs)
         context['url'] = 'list-lab-board'
@@ -390,7 +390,7 @@ class BaseSizesUnpolishedBoard:
     success_url = reverse_lazy('list-sizes-unpolished-board')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        kwargs['list_articles'] = Sizes_unpolished_board_model.objects.all().order_by('-date_created')
+        kwargs['list_records'] = Sizes_unpolished_board_model.objects.all().order_by('-date_created')
         kwargs['update'] = True
         context = super().get_context_data(**kwargs)
         context['url'] = 'list-sizes-unpolished-board'
@@ -444,7 +444,7 @@ class BaseCleaningPressTape:
     success_url = reverse_lazy('list-cleaning-press-tape')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        kwargs['list_articles'] = Cleaning_press_tape_model.objects.all().order_by('-date_created')
+        kwargs['list_records'] = Cleaning_press_tape_model.objects.all().order_by('-date_created')
         kwargs['update'] = True
         context = super().get_context_data(**kwargs)
         context['url'] = 'list-cleaning-press-tape'
@@ -498,7 +498,7 @@ class BasePressSap:
     success_url = reverse_lazy('list-press-sap')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        kwargs['list_articles'] = Press_sap_model.objects.all().order_by('-date_created')
+        kwargs['list_records'] = Press_sap_model.objects.all().order_by('-date_created')
         kwargs['update'] = True
         context = super().get_context_data(**kwargs)
         context['url'] = 'list-press-sap'
