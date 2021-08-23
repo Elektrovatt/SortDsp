@@ -53,8 +53,3 @@ DATABASES = {
 ##### 9) Запустить сервер
 
     python manage.py runserver
-
-## License
-небольшой дамп с данными
-    
-python manage.py loaddata db.json
