@@ -29,7 +29,20 @@
 
     pip install -r requirements.txt
 
-##### 6) Выполнить команду для выполнения миграций
+##### 6) Создайте базу данных postgres и добавьте учетные данные в settings.py:
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'db_name',
+        'USER': 'name',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+##### 7) Выполнить команду для выполнения миграций
 
     python manage.py migrate
     
